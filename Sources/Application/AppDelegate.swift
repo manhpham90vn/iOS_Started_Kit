@@ -8,22 +8,27 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let assembler: Assembler = DefaultAssembler()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let libManager = LibsManager.shared
         libManager.setupLibs(with: window)
-        
         logResourcesCount()
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.makeKeyAndVisible()
-        window?.rootViewController = ViewController()
+        window!.makeKeyAndVisible()
+        let vm: AppViewModel = assembler.resolve(window: window!)
+        let input = AppViewModel.Input(loadTrigger: Driver.just(()))
+        let output = vm.transform(input)
+        output.toMain.drive().disposed(by: rx.disposeBag)
         
         return true
     }
