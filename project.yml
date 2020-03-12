@@ -8,7 +8,6 @@ options:
   tabWidth: 4
   bundleIdPrefix: "com.manhpham"
 
-  
 targets:
   MyApp:
     type: application
