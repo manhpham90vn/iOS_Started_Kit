@@ -1,0 +1,17 @@
+name: My Project
+
+options:
+  createIntermediateGroups: true
+  groupSortPosition: top
+  generateEmptyDirectories: true
+  indentWidth: 4
+  tabWidth: 4
+  bundleIdPrefix: "com.manhpham"
+
+  
+targets:
+  MyApp:
+    type: application
+    platform: iOS
+    deploymentTarget: "10.0"
+    sources: [Sources]
