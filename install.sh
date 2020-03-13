@@ -1,1 +1,2 @@
 xcodegen generate
+pod install

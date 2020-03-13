@@ -5,10 +5,6 @@
 //  Created by Manh Pham on 3/12/20.
 //
 
-import Foundation
-import RxSwift
-import RxCocoa
-
 struct AppViewModel {
     let navigator: AppNavigatorType
     let useCase: AppUseCaseType
