@@ -1,5 +1,5 @@
 //
-//  ObjectResponse.swift
+//  Login.swift
 //  MyApp
 //
 //  Created by Manh Pham on 3/14/20.
@@ -7,25 +7,21 @@
 
 import Foundation
 
-class ObjectResponse<T: Codable>: Codable {
+import Foundation
+
+class Login: Codable {
     
-    var code: Int?
-    var message: String?
-    var data: T?
+    var accessToken: String?
+    var profile: User?
     
     enum CodingKeys: String, CodingKey {
-        case code = "code"
-        case message = "message"
-        case data = "data"
+        case accessToken = "access_token"
+        case profile = "profile"
     }
     
-    func isSuccess() -> Bool {
-        return code == 200
-    }
-            
 }
 
-extension ObjectResponse: CustomStringConvertible {
+extension Login: CustomStringConvertible {
     
     var description: String {
         guard let data = try? JSONEncoder().encode(self) else { return "" }

@@ -30,22 +30,22 @@ final class HomeViewController: UIViewController, BindableType {
         let test = tapButton
             .rx
             .tap
-            .flatMapLatest({ ApiConnection.share.login(email: "test123@test.com", password: "123456") })
-            .trackError(error, type: User.self)
+            .flatMapLatest({ ApiConnection.share.login(email: "test123@test.com", password: "123123") })
+            .trackError(error, type: Login.self)
             .trackActivity(loading)
             .catchErrorJustComplete()
             .asObservable()
             .share(replay: 1, scope: .whileConnected)
         
         test
-            .subscribe(onNext: { (user) in
-                print(user)
+            .subscribe(onNext: { (response) in
+                LogInfo(response.data?.accessToken)
             })
             .disposed(by: rx.disposeBag)
         
         test
-            .subscribe(onNext: { (user) in
-                print(user)
+            .subscribe(onNext: { (response) in
+                LogInfo(response.data?.profile?.description)
             })
             .disposed(by: rx.disposeBag)
         

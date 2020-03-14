@@ -16,7 +16,21 @@ class Meal: Codable {
     var createdAt: Double?
     
     enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case title = "tile"
+        case price = "price"
+        case image = "image"
         case createdAt = "created_at"
+    }
+    
+}
+
+extension Meal: CustomStringConvertible {
+    
+    var description: String {
+        guard let data = try? JSONEncoder().encode(self) else { return "" }
+        guard let jsonString = String(data: data, encoding: .utf8) else { return "" }
+        return jsonString
     }
     
 }
