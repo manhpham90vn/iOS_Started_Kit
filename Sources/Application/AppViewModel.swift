@@ -5,12 +5,20 @@
 //  Created by Manh Pham on 3/12/20.
 //
 
-struct AppViewModel {
+class AppViewModel: BaseViewModel {
+    
     let navigator: AppNavigatorType
     let useCase: AppUseCaseType
+    
+    init(navigator: AppNavigatorType, useCase: AppUseCaseType) {
+        self.navigator = navigator
+        self.useCase = useCase
+    }
+    
 }
 
 extension AppViewModel: ViewModelType {
+    
     struct Input {
         let loadTrigger: Driver<Void>
     }
@@ -27,4 +35,5 @@ extension AppViewModel: ViewModelType {
         
         return Output(toMain: toMain)
     }
+    
 }

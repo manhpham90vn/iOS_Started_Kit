@@ -9,72 +9,50 @@
 import UIKit
 import Reusable
 
-final class HomeViewController: UIViewController, BindableType {
-    
-    let error = ErrorTracker()
-    let loading = ActivityIndicator()
-    
+final class HomeViewController: BaseViewController, BindableType {
+        
     // MARK: - IBOutlets
     @IBOutlet weak var tapButton: UIButton!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     
     // MARK: - Properties
-    
     var viewModel: HomeViewModel!
 
     // MARK: - Life Cycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configView()
-        
-        let test = tapButton
-            .rx
-            .tap
-            .flatMapLatest({ ApiConnection.share.login(email: "test123@test.com", password: "123123") })
-            .trackError(error, type: Login.self)
-            .trackActivity(loading)
-            .catchErrorJustComplete()
-            .asObservable()
-            .share(replay: 1, scope: .whileConnected)
-        
-        test
-            .subscribe(onNext: { (response) in
-                LogInfo(response.data?.accessToken)
-            })
-            .disposed(by: rx.disposeBag)
-        
-        test
-            .subscribe(onNext: { (response) in
-                LogInfo(response.data?.profile?.description)
-            })
-            .disposed(by: rx.disposeBag)
-        
-        error.asDriver().drive(onNext: { (error) in
-            if let error = error as? AppError {
-                LogError(error.localizedDescription)
-            } else {
-                LogError(error.localizedDescription)
-            }
-        }).disposed(by: rx.disposeBag)
-        
-        loading.asDriver().drive(onNext: { (loading) in
-            LogDebug(loading)
-        })
-        .disposed(by: rx.disposeBag)
-    }
-
-    deinit {
-        logDeinit()
     }
     
     // MARK: - Methods
-
     private func configView() {
         title = "Home"
     }
 
     func bindViewModel() {
-        let input = HomeViewModel.Input()
+        viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
+        
+        let input = HomeViewModel.Input(email: emailTextField.rx.text.orEmpty.asDriver(),
+                                        password: passwordTextField.rx.text.orEmpty.asDriver(),
+                                        trigger: tapButton.rx.tap.asDriver())
         let output = viewModel.transform(input)
+    
+        output
+            .response
+            .asObservable()
+            .subscribe(onNext: { (response) in
+                AppHelper.showMessage(title: "Token", message: "\(response.data?.accessToken ?? "")")
+            })
+            .disposed(by: rx.disposeBag)
+        
+        output
+            .response
+            .asObservable()
+            .subscribe(onNext: { (response) in
+                LogInfo(response.data?.profile?.description)
+            })
+            .disposed(by: rx.disposeBag)
     }
 }

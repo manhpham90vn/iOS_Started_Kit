@@ -21,6 +21,9 @@ target 'MyApp' do
   # Logging
   pod 'XCGLogger', '~> 7.0.1' # https://github.com/DaveWoodCom/XCGLogger
   
+  # UI
+  pod 'SVProgressHUD' # https://github.com/SVProgressHUD/SVProgressHUD
+  
 end
 
 post_install do |installer|

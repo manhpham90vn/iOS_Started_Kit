@@ -20,3 +20,11 @@ class Menu: Codable {
     }
     
 }
+
+extension Menu: CustomStringConvertible {
+    
+    var description: String {
+        return AppHelper.convert(self)
+    }
+    
+}

@@ -21,6 +21,7 @@ PODS:
   - RxRelay (5.1.0):
     - RxSwift (~> 5)
   - RxSwift (5.1.0)
+  - SVProgressHUD (2.2.5)
   - Then (2.6.0)
   - Validator (3.2.1)
   - XCGLogger (7.0.1):
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - Reusable
   - RxCocoa (~> 5)
   - RxSwift (~> 5)
+  - SVProgressHUD
   - Then
   - Validator
   - XCGLogger (~> 7.0.1)
@@ -48,6 +50,7 @@ SPEC REPOS:
     - RxCocoa
     - RxRelay
     - RxSwift
+    - SVProgressHUD
     - Then
     - Validator
     - XCGLogger
@@ -61,10 +64,11 @@ SPEC CHECKSUMS:
   RxCocoa: 13d2a4d7546a34b8ececae8c281e4ea1dbb94f2b
   RxRelay: a168bd6caf712d00c676ac344e9295afc93b418e
   RxSwift: ad5874f24bb0dbffd1e9bb8443604e3578796c7a
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: bb4ef51321b8c147a0b84ba72f92a2ac1185b28e
+PODFILE CHECKSUM: 98513f11467d9b21218c20b8f790a2ac04dd562a
 
 COCOAPODS: 1.9.1

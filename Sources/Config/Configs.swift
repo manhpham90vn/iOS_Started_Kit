@@ -15,5 +15,6 @@ class Configs {
     let baseUrl = "http://149.28.137.201/api/"
     let loggingEnabled = false
     let logResourcesCountEnabled = false
+    let logDeinitEnabled = true
     
 }

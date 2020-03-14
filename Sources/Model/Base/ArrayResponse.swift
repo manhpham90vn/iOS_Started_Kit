@@ -28,9 +28,7 @@ class ArrayResponse<T: Codable>: Codable {
 extension ArrayResponse: CustomStringConvertible {
     
     var description: String {
-        guard let data = try? JSONEncoder().encode(self) else { return "" }
-        guard let jsonString = String(data: data, encoding: .utf8) else { return "" }
-        return jsonString
+        return AppHelper.convert(self)
     }
     
 }

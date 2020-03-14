@@ -14,5 +14,5 @@ protocol HomeNavigatorType {
 
 struct HomeNavigator: HomeNavigatorType {
     unowned let assembler: Assembler
-    unowned let navigationController: UINavigationController
+    unowned let navigationController: BaseNavigationController
 }

@@ -24,9 +24,7 @@ class Login: Codable {
 extension Login: CustomStringConvertible {
     
     var description: String {
-        guard let data = try? JSONEncoder().encode(self) else { return "" }
-        guard let jsonString = String(data: data, encoding: .utf8) else { return "" }
-        return jsonString
+        return AppHelper.convert(self)
     }
     
 }

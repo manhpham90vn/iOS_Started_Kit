@@ -16,7 +16,7 @@ struct AppNavigator: AppNavigatorType {
     unowned let window: UIWindow
     
     func toHome() {
-        let nav = UINavigationController()
+        let nav = BaseNavigationController()
         let vc: HomeViewController = assembler.resolve(navigationController: nav)
         nav.viewControllers = [vc]
         window.rootViewController = nav

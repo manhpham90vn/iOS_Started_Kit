@@ -9,21 +9,21 @@
 import UIKit
 
 protocol HomeAssembler {
-    func resolve(navigationController: UINavigationController) -> HomeViewController
-    func resolve(navigationController: UINavigationController) -> HomeViewModel
-    func resolve(navigationController: UINavigationController) -> HomeNavigatorType
+    func resolve(navigationController: BaseNavigationController) -> HomeViewController
+    func resolve(navigationController: BaseNavigationController) -> HomeViewModel
+    func resolve(navigationController: BaseNavigationController) -> HomeNavigatorType
     func resolve() -> HomeUseCaseType
 }
 
 extension HomeAssembler {
-    func resolve(navigationController: UINavigationController) -> HomeViewController {
+    func resolve(navigationController: BaseNavigationController) -> HomeViewController {
         let vc = HomeViewController.instantiate()
         let vm: HomeViewModel = resolve(navigationController: navigationController)
         vc.bindViewModel(to: vm)
         return vc
     }
 
-    func resolve(navigationController: UINavigationController) -> HomeViewModel {
+    func resolve(navigationController: BaseNavigationController) -> HomeViewModel {
         return HomeViewModel(
             navigator: resolve(navigationController: navigationController),
             useCase: resolve()
@@ -32,7 +32,7 @@ extension HomeAssembler {
 }
 
 extension HomeAssembler where Self: DefaultAssembler {
-    func resolve(navigationController: UINavigationController) -> HomeNavigatorType {
+    func resolve(navigationController: BaseNavigationController) -> HomeNavigatorType {
         return HomeNavigator(assembler: self, navigationController: navigationController)
     }
 
