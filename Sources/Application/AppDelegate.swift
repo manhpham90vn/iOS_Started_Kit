@@ -18,7 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let libManager = LibsManager.shared
         libManager.setupLibs(with: window)
-        logResourcesCount()
+        if Configs.share.logResourcesCountEnabled {
+            logResourcesCount()
+        }
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window!.makeKeyAndVisible()

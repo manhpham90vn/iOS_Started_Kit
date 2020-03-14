@@ -1,9 +1,10 @@
 PODS:
   - Alamofire (5.0.2)
-  - Moya (14.0.0):
-    - Moya/Core (= 14.0.0)
   - Moya/Core (14.0.0):
     - Alamofire (~> 5.0)
+  - Moya/RxSwift (14.0.0):
+    - Moya/Core
+    - RxSwift (~> 5.0)
   - "NSObject+Rx (5.0.2)":
     - RxSwift (~> 5.0)
   - ObjcExceptionBridging (1.0.1):
@@ -28,7 +29,7 @@ PODS:
     - ObjcExceptionBridging
 
 DEPENDENCIES:
-  - Moya (~> 14.0)
+  - Moya/RxSwift
   - "NSObject+Rx (~> 5.0)"
   - Reusable
   - RxCocoa (~> 5)
@@ -64,6 +65,6 @@ SPEC CHECKSUMS:
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: 531cf1f235c1dbc97b06f46013c36ab733e8c656
+PODFILE CHECKSUM: bb4ef51321b8c147a0b84ba72f92a2ac1185b28e
 
 COCOAPODS: 1.9.1

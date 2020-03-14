@@ -6,7 +6,7 @@ target 'MyApp' do
   inhibit_all_warnings!
   
   # Networking
-  pod 'Moya', '~> 14.0' # https://github.com/Moya/Moya
+  pod 'Moya/RxSwift' # https://github.com/Moya/Moya
   
   # Rx Extensions
   pod 'RxSwift', '~> 5' # https://github.com/ReactiveX/RxSwift
