@@ -5,7 +5,7 @@
 //  Created by Manh Pham on 3/14/20.
 //
 
-class BaseViewModel: NSObject {
+class BaseViewModel: NSObject { // swiftlint:disable:this final_class
     
     let error = ErrorTracker()
     let loading = ActivityIndicator()

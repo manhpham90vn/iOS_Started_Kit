@@ -7,16 +7,16 @@
 
 import Foundation
 
-class ArrayResponse<T: Codable>: Codable {
+final class ArrayResponse<T: Codable>: Codable {
     
     var code: Int?
     var message: String?
     var data: [T]?
          
     enum CodingKeys: String, CodingKey {
-        case code = "code"
-        case message = "message"
-        case data = "data"
+        case code    =  "code"
+        case message =  "message"
+        case data    =  "data"
     }
     
     func isSuccess() -> Bool {

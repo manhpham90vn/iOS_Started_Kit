@@ -9,7 +9,7 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let assembler: Assembler = DefaultAssembler()
@@ -23,11 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window!.makeKeyAndVisible()
-        let vm: AppViewModel = assembler.resolve(window: window!)
+        window!.makeKeyAndVisible() // // swiftlint:disable:this force_unwrapping
+        let vm: AppViewModel = assembler.resolve(window: window!) // swiftlint:disable:this force_unwrapping
         let input = AppViewModel.Input(loadTrigger: Driver.just(()))
         let output = vm.transform(input)
-        output.toMain.drive().disposed(by: rx.disposeBag)
+        output
+            .toMain
+            .drive()
+            .disposed(by: rx.disposeBag)
         
         return true
     }
@@ -45,6 +48,5 @@ extension AppDelegate {
             })
         #endif
     }
-    
     
 }

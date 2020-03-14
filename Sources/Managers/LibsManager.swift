@@ -12,9 +12,10 @@ import NSObject_Rx
 import Reusable
 import Validator
 
-class LibsManager {
+final class LibsManager {
 
     static let shared = LibsManager()
+    
     private init() {}
     
     func setupLibs(with window: UIWindow?) {

@@ -19,3 +19,11 @@ targets:
         SWIFT_VERSION: "5.0"
         SWIFT_OBJC_BRIDGING_HEADER: Sources/Resources/MyApp-Bridging-Header.h
         CODE_SIGN_STYLE: "Manual"
+    postCompileScripts:
+        - name: Swiftlint
+          script: |
+            if which swiftlint >/dev/null; then
+              swiftlint
+            else
+              echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+            fi

@@ -22,6 +22,7 @@ PODS:
     - RxSwift (~> 5)
   - RxSwift (5.1.0)
   - SVProgressHUD (2.2.5)
+  - SwiftLint (0.39.1)
   - Then (2.6.0)
   - Validator (3.2.1)
   - XCGLogger (7.0.1):
@@ -36,6 +37,7 @@ DEPENDENCIES:
   - RxCocoa (~> 5)
   - RxSwift (~> 5)
   - SVProgressHUD
+  - SwiftLint
   - Then
   - Validator
   - XCGLogger (~> 7.0.1)
@@ -51,6 +53,7 @@ SPEC REPOS:
     - RxRelay
     - RxSwift
     - SVProgressHUD
+    - SwiftLint
     - Then
     - Validator
     - XCGLogger
@@ -65,10 +68,11 @@ SPEC CHECKSUMS:
   RxRelay: a168bd6caf712d00c676ac344e9295afc93b418e
   RxSwift: ad5874f24bb0dbffd1e9bb8443604e3578796c7a
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftLint: 55e96a4a4d537d4a3156859fc1c54bd24851a046
   Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: 98513f11467d9b21218c20b8f790a2ac04dd562a
+PODFILE CHECKSUM: 629ed09098fbcc7e1e66ffca651f1a2a86d6e34e
 
 COCOAPODS: 1.9.1

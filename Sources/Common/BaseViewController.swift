@@ -8,7 +8,7 @@
 import UIKit
 import SVProgressHUD
 
-class BaseViewController: UIViewController {
+class BaseViewController: UIViewController { // swiftlint:disable:this final_class
     
     let isLoading = BehaviorRelay(value: false)
     

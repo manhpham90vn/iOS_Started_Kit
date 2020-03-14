@@ -7,9 +7,7 @@
 
 import Foundation
 
-import Foundation
-
-class Login: Codable {
+final class Login: Codable {
     
     var accessToken: String?
     var profile: User?

@@ -21,7 +21,9 @@ enum AppError: LocalizedError {
 }
 
 final class ErrorTracker: SharedSequenceConvertibleType {
+    
     typealias SharingStrategy = DriverSharingStrategy
+    
     private let _subject = PublishSubject<Error>()
 
     func trackError<O: ObservableConvertibleType>(from source: O) -> Observable<O.Element> {

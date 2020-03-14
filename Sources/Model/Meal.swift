@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Meal: Codable {
+final class Meal: Codable {
     
     var id: Int?
     var title: String?

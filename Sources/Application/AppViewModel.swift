@@ -5,7 +5,7 @@
 //  Created by Manh Pham on 3/12/20.
 //
 
-class AppViewModel: BaseViewModel {
+final class AppViewModel: BaseViewModel {
     
     let navigator: AppNavigatorType
     let useCase: AppUseCaseType

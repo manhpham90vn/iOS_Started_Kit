@@ -7,9 +7,10 @@
 
 import Foundation
 
-class Configs {
+final class Configs {
     
     static let share = Configs()
+    
     private init() {}
     
     let baseUrl = "http://149.28.137.201/api/"

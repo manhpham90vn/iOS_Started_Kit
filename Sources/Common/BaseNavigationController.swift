@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BaseNavigationController: UINavigationController {
+class BaseNavigationController: UINavigationController { // swiftlint:disable:this final_class
     
     override func viewDidLoad() {
         super.viewDidLoad()

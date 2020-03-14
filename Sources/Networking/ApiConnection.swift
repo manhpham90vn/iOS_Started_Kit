@@ -7,7 +7,7 @@
 
 import Moya
 
-class ApiConnection {
+final class ApiConnection {
     
     static let share = ApiConnection()
     

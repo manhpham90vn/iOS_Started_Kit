@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Menu: Codable {
+final class Menu: Codable {
     
     var id: Int?
     var title: String?

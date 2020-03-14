@@ -16,7 +16,7 @@ enum ApiRouter {
 extension ApiRouter: TargetType {
     
     var baseURL: URL {
-        return URL(string: Configs.share.baseUrl)!
+        return URL(string: Configs.share.baseUrl)! // swiftlint:disable:this force_unwrapping
     }
     
     var path: String {
@@ -48,7 +48,7 @@ extension ApiRouter: TargetType {
         return .requestPlain
     }
     
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         if let token = AuthManager.share.token {
             return ["Authorization": "Bearer \(token)"]
         }
@@ -58,7 +58,7 @@ extension ApiRouter: TargetType {
     var parameters: [String: Any]? {
         var params: [String: Any] = [:]
         switch self {
-        case .login(let email, let password):
+        case .login(let email, let password): // swiftlint:disable:this pattern_matching_keywords
             params["email"] = email
             params["password"] = password
         case .listMenu(let date):

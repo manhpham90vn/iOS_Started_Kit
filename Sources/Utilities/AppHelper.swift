@@ -7,7 +7,9 @@
 
 import Foundation
 
-class AppHelper {
+final class AppHelper {
+    
+    private init() {}
     
     class func convert<T: Codable>(_ object: T) -> String {
         guard let data = try? JSONEncoder().encode(object) else { return "" }
@@ -17,7 +19,8 @@ class AppHelper {
     
     class func convert<T: Codable>(_ object: T) -> [String: Any]? {
         guard let data = try? JSONEncoder().encode(object) else { return nil }
-        guard let jsonObject = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) else { return nil }
+        guard let jsonObject = try? JSONSerialization.jsonObject(with: data,
+                                                                 options: .allowFragments) else { return nil }
         guard let json = jsonObject as? [String: Any] else { return nil }
         return json
     }

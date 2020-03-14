@@ -17,6 +17,7 @@ target 'MyApp' do
   pod 'Reusable' # https://github.com/AliSoftware/Reusable
   pod 'Then' # https://github.com/devxoul/Then
   pod 'Validator' # https://github.com/adamwaite/Validator
+  pod 'SwiftLint' # https://github.com/realm/SwiftLint
   
   # Logging
   pod 'XCGLogger', '~> 7.0.1' # https://github.com/DaveWoodCom/XCGLogger

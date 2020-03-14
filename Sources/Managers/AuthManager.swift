@@ -7,9 +7,10 @@
 
 import Foundation
 
-class AuthManager {
+final class AuthManager {
     
     static let share = AuthManager()
+    
     private init() {}
     
     private let tokenKey = "tokenKey"

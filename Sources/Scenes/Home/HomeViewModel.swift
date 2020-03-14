@@ -6,7 +6,7 @@
 //  Copyright © 2020 Fujitech. All rights reserved.
 //
 
-class HomeViewModel: BaseViewModel {
+final class HomeViewModel: BaseViewModel {
     
     let navigator: HomeNavigatorType
     let useCase: HomeUseCaseType
