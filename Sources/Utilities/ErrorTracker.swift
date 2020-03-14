@@ -33,6 +33,9 @@ final class ErrorTracker: SharedSequenceConvertibleType {
             if let element = element as? ObjectResponse<T>, !element.isSuccess(), let message = element.message {
                 self.onError(message)
             }
+            if let element = element as? ArrayResponse<T>, !element.isSuccess(), let message = element.message {
+                self.onError(message)
+            }
         }, onError: { (error) in
             self.onError(error)
         })
