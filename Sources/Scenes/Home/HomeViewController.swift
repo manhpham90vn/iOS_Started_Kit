@@ -32,7 +32,6 @@ final class HomeViewController: UIViewController, BindableType {
 
     private func configView() {
         title = "Home"
-        view.backgroundColor = .white
     }
 
     func bindViewModel() {
