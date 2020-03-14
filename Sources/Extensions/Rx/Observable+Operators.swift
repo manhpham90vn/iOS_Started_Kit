@@ -14,5 +14,11 @@ extension ObservableType {
             return Driver.empty()
         }
     }
+    
+    func catchErrorJustComplete() -> Observable<Element> {
+        return catchError { _ in
+            return Observable.empty()
+        }
+    }
 
 }

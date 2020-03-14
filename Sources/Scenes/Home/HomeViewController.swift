@@ -31,8 +31,9 @@ final class HomeViewController: UIViewController, BindableType {
             .rx
             .tap
             .flatMapLatest({ ApiConnection.share.login(email: "test123@test.com", password: "123456") })
-            .trackError(error)
+            .trackError(error, type: User.self)
             .trackActivity(loading)
+            .catchErrorJustComplete()
             .asObservable()
             .share(replay: 1, scope: .whileConnected)
         
@@ -49,11 +50,15 @@ final class HomeViewController: UIViewController, BindableType {
             .disposed(by: rx.disposeBag)
         
         error.asDriver().drive(onNext: { (error) in
-            LogError(error)
+            if let error = error as? AppError {
+                LogError(error.localizedDescription)
+            } else {
+                LogError(error.localizedDescription)
+            }
         }).disposed(by: rx.disposeBag)
         
         loading.asDriver().drive(onNext: { (loading) in
-            LogInfo(loading)
+            LogDebug(loading)
         })
         .disposed(by: rx.disposeBag)
     }

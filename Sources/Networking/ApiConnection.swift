@@ -53,12 +53,12 @@ class ApiConnection {
 
 extension ApiConnection: Api {
     
-    func login(email: String, password: String) -> Single<User?> {
-        return request(target: MultiTarget(ApiRouter.login(email: email, password: password)), type: User.self).map({ $0.data })
+    func login(email: String, password: String) -> Single<ObjectResponse<User>> {
+        return request(target: MultiTarget(ApiRouter.login(email: email, password: password)), type: User.self)
     }
     
-    func listMenu(date: String) -> Single<Menu?> {
-        return request(target: MultiTarget(ApiRouter.listMenu(date: date)), type: Menu.self).map({ $0.data })
+    func listMenu(date: String) -> Single<ObjectResponse<Menu>> {
+        return request(target: MultiTarget(ApiRouter.listMenu(date: date)), type: Menu.self)
     }
     
 }
