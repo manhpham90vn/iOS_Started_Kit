@@ -1,2 +1,4 @@
 xcodegen generate
-pod install
+carthage update --platform iOS --no-use-binaries --configuration Debug
+bundle install
+bundle exec pod install

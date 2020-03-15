@@ -1,0 +1,7 @@
+github "ReactiveX/RxSwift" ~> 5.0
+github "Moya/Moya" ~> 14.0
+github "RxSwiftCommunity/NSObject-Rx"
+github "AliSoftware/Reusable"
+github "adamwaite/Validator"
+github "DaveWoodCom/XCGLogger" ~> 7.0.1
+github "SVProgressHUD/SVProgressHUD"

@@ -6,6 +6,7 @@
 //
 
 import Moya
+import RxMoya
 
 final class ApiConnection {
     
