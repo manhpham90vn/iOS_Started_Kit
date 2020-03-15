@@ -10,6 +10,7 @@ iOS Started Kit: Clean Architecture + RxSwift + Moya
 You need
 1. [xcodegen](https://github.com/yonaskolb/XcodeGen)
 2. [Bundler](https://bundler.io)
+3. [Carthage](https://github.com/Carthage/Carthage)
 
 and run
 ```
