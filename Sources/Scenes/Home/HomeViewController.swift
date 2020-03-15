@@ -40,12 +40,12 @@ final class HomeViewController: BaseViewController, BindableType {
         let output = viewModel.transform(input)
     
         output
-            .isValidateEmail
-            .drive(usernameValidationBinder)
+            .validateEmail
+            .drive(emailValidationBinder)
             .disposed(by: rx.disposeBag)
         
         output
-            .isValidatePassword
+            .validatePassword
             .drive(passwordValidationBinder)
             .disposed(by: rx.disposeBag)
         
@@ -71,7 +71,7 @@ final class HomeViewController: BaseViewController, BindableType {
 
 // MARK: - Binders
 extension HomeViewController {
-    var usernameValidationBinder: Binder<ValidationResult> {
+    var emailValidationBinder: Binder<ValidationResult> {
         return Binder(self) { vc, result in
             switch result {
             case .valid:

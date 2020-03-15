@@ -28,8 +28,8 @@ extension HomeViewModel: ViewModelType {
 
     struct Output {
         let response: Driver<ObjectResponse<Login>>
-        let isValidateEmail: Driver<ValidationResult>
-        let isValidatePassword: Driver<ValidationResult>
+        let validateEmail: Driver<ValidationResult>
+        let validatePassword: Driver<ValidationResult>
     }
 
     func transform(_ input: Input) -> Output {
@@ -68,7 +68,7 @@ extension HomeViewModel: ViewModelType {
             })
 
         return Output(response: response,
-                      isValidateEmail: triggerValidateEmail,
-                      isValidatePassword: triggerValidatePassword)
+                      validateEmail: triggerValidateEmail,
+                      validatePassword: triggerValidatePassword)
     }
 }
