@@ -37,7 +37,7 @@ extension HomeViewModel: ViewModelType {
             .withLatestFrom(Driver.combineLatest(input.email, input.password))
             .flatMapLatest({ [weak self] (email, password) -> Driver<ObjectResponse<Login>> in
                 guard let self = self else { return Driver.empty() }
-                    return ApiConnection.share.login(email: email, password: password)
+                return self.useCase.login(email: email, password: password)
                     .trackError(self.error, type: Login.self)
                     .trackActivity(self.loading)
                     .asDriverOnErrorJustComplete()

@@ -37,6 +37,6 @@ extension HomeAssembler where Self: DefaultAssembler {
     }
 
     func resolve() -> HomeUseCaseType {
-        return HomeUseCase()
+        return HomeUseCase(repository: resolve())
     }
 }

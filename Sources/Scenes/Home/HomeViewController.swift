@@ -42,6 +42,7 @@ final class HomeViewController: BaseViewController, BindableType {
         output
             .response
             .asObservable()
+            .filter({ $0.data != nil })
             .subscribe(onNext: { (response) in
                 AppHelper.showMessage(title: "Token", message: "\(response.data?.accessToken ?? "")")
             })

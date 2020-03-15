@@ -22,8 +22,12 @@ final class ApiConnection {
     }
     
     private let provider = MoyaProvider<MultiTarget>(plugins: plugins).rx
-        
-    private func request<T: Codable>(target: MultiTarget, type: T.Type) -> Single<ObjectResponse<T>> {
+    
+}
+
+extension ApiConnection {
+    
+    func request<T: Codable>(target: MultiTarget, type: T.Type) -> Single<ObjectResponse<T>> {
         return connectedToInternet()
             .filter({ $0 == true })
             .take(1)
@@ -36,7 +40,7 @@ final class ApiConnection {
             .asSingle()
     }
     
-    private func requestArray<T: Codable>(target: MultiTarget, type: T.Type) -> Single<ArrayResponse<T>> {
+    func requestArray<T: Codable>(target: MultiTarget, type: T.Type) -> Single<ArrayResponse<T>> {
         return connectedToInternet()
             .filter({ $0 == true })
             .take(1)
@@ -47,18 +51,6 @@ final class ApiConnection {
             })
             .observeOn(MainScheduler.instance)
             .asSingle()
-    }
-    
-}
-
-extension ApiConnection: Api {
-    
-    func login(email: String, password: String) -> Single<ObjectResponse<Login>> {
-        return request(target: MultiTarget(ApiRouter.login(email: email, password: password)), type: Login.self)
-    }
-    
-    func listMenu(date: String) -> Single<ObjectResponse<Menu>> {
-        return request(target: MultiTarget(ApiRouter.listMenu(date: date)), type: Menu.self)
     }
     
 }

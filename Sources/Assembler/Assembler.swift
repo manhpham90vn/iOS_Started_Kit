@@ -5,7 +5,8 @@
 //  Created by Manh Pham on 3/12/20.
 //
 
-protocol Assembler: class, AppAssembler, HomeAssembler {
+protocol Assembler: class, AppAssembler, RepositoriesAssembler,
+    HomeAssembler {
     
 }
 
