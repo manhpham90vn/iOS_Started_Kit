@@ -5,6 +5,7 @@ iOS Started Kit: Clean Architecture + RxSwift + Moya
 You need
 1. [xcodegen](https://github.com/yonaskolb/XcodeGen)
 2. [MGiGen](https://github.com/tuan188/MGiGen)
+3. [Bundler](https://bundler.io)
 
 and run
 ```
