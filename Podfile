@@ -24,6 +24,7 @@ target 'MyApp' do
   
   # UI
   pod 'SVProgressHUD' # https://github.com/SVProgressHUD/SVProgressHUD
+  pod 'Toast-Swift', '~> 5.0'  # https://github.com/scalessec/Toast-Swift
   
 end
 

@@ -40,6 +40,16 @@ final class HomeViewController: BaseViewController, BindableType {
         let output = viewModel.transform(input)
     
         output
+            .isValidateEmail
+            .drive(usernameValidationBinder)
+            .disposed(by: rx.disposeBag)
+        
+        output
+            .isValidatePassword
+            .drive(passwordValidationBinder)
+            .disposed(by: rx.disposeBag)
+        
+        output
             .response
             .asObservable()
             .filter({ $0.data != nil })
@@ -51,9 +61,35 @@ final class HomeViewController: BaseViewController, BindableType {
         output
             .response
             .asObservable()
+            .filter({ $0.data != nil })
             .subscribe(onNext: { (response) in
                 LogInfo(response.data?.profile?.description)
             })
             .disposed(by: rx.disposeBag)
+    }
+}
+
+// MARK: - Binders
+extension HomeViewController {
+    var usernameValidationBinder: Binder<ValidationResult> {
+        return Binder(self) { vc, result in
+            switch result {
+            case .valid:
+                break
+            case let .invalid(errors):
+                vc.view.makeToast(errors.map { $0.message }.joined(separator: "\n"))
+            }
+        }
+    }
+    
+    var passwordValidationBinder: Binder<ValidationResult> {
+        return Binder(self) { vc, result in
+            switch result {
+            case .valid:
+                break
+            case let .invalid(errors):
+                vc.view.makeToast(errors.map { $0.message }.joined(separator: "\n"))
+            }
+        }
     }
 }

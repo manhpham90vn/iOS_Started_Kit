@@ -24,6 +24,7 @@ PODS:
   - SVProgressHUD (2.2.5)
   - SwiftLint (0.39.1)
   - Then (2.6.0)
+  - Toast-Swift (5.0.1)
   - Validator (3.2.1)
   - XCGLogger (7.0.1):
     - XCGLogger/Core (= 7.0.1)
@@ -39,6 +40,7 @@ DEPENDENCIES:
   - SVProgressHUD
   - SwiftLint
   - Then
+  - Toast-Swift (~> 5.0)
   - Validator
   - XCGLogger (~> 7.0.1)
 
@@ -55,6 +57,7 @@ SPEC REPOS:
     - SVProgressHUD
     - SwiftLint
     - Then
+    - Toast-Swift
     - Validator
     - XCGLogger
 
@@ -70,9 +73,10 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftLint: 55e96a4a4d537d4a3156859fc1c54bd24851a046
   Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: 629ed09098fbcc7e1e66ffca651f1a2a86d6e34e
+PODFILE CHECKSUM: cac5a4486b2f232ad67a6533c19363c17fcdfa87
 
 COCOAPODS: 1.9.1
