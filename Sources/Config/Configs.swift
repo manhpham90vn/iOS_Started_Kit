@@ -14,6 +14,7 @@ final class Configs {
     private init() {}
     
     let baseUrl = "http://149.28.137.201/api/"
+    let apiTimeOut = RxTimeInterval.seconds(10)
     let loggingEnabled = false
     let logResourcesCountEnabled = false
     let logDeinitEnabled = false
