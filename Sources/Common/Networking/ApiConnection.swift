@@ -30,6 +30,7 @@ extension ApiConnection {
     
     func request<T: Codable>(target: MultiTarget, type: T.Type) -> Single<ObjectResponse<T>> {
         return connectedToInternet()
+            .timeout(Configs.share.apiTimeOut, scheduler: MainScheduler.instance)
             .filter({ $0 == true })
             .take(1)
             .flatMap({ _ in
@@ -44,6 +45,7 @@ extension ApiConnection {
     
     func requestArray<T: Codable>(target: MultiTarget, type: T.Type) -> Single<ArrayResponse<T>> {
         return connectedToInternet()
+            .timeout(Configs.share.apiTimeOut, scheduler: MainScheduler.instance)
             .filter({ $0 == true })
             .take(1)
             .flatMap({ _ in
