@@ -48,8 +48,8 @@ final class MenuViewController: BaseViewController, BindableType {
         
         viewModel
             .loading
-            .asObservable()
-            .bind(to: isLoading)
+            .asDriver()
+            .drive(isLoading)
             .disposed(by: rx.disposeBag)
     }
 

@@ -36,8 +36,8 @@ final class HomeViewController: BaseViewController, BindableType {
     func bindViewModel() {
         viewModel
             .loading
-            .asObservable()
-            .bind(to: isLoading)
+            .asDriver()
+            .drive(isLoading)
             .disposed(by: rx.disposeBag)
         
         let input = HomeViewModel.Input(email: emailTextField.rx.text.orEmpty.asDriver(),
