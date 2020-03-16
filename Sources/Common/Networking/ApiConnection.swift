@@ -36,7 +36,6 @@ extension ApiConnection {
                 return self.provider
                     .request(target)
                     .timeout(Configs.share.apiTimeOut, scheduler: MainScheduler.instance)
-                    .filterSuccessfulStatusCodes()
                     .map(ObjectResponse<T>.self)
             })
             .observeOn(MainScheduler.instance)
@@ -51,7 +50,6 @@ extension ApiConnection {
                 return self.provider
                     .request(target)
                     .timeout(Configs.share.apiTimeOut, scheduler: MainScheduler.instance)
-                    .filterSuccessfulStatusCodes()
                     .map(ArrayResponse<T>.self)
             })
             .observeOn(MainScheduler.instance)
