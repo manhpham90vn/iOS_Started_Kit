@@ -27,7 +27,7 @@ extension HomeViewModel: ViewModelType {
     }
 
     struct Output {
-        let response: Driver<ObjectResponse<Login>>
+        let response: Driver<Void>
         let validateEmail: Driver<ValidationResult>
         let validatePassword: Driver<ValidationResult>
     }
@@ -66,6 +66,14 @@ extension HomeViewModel: ViewModelType {
                     .trackActivity(self.loading)
                     .asDriverOnErrorJustComplete()
             })
+            .map({ $0.data?.accessToken })
+            .unwrap()
+            .do(onNext: { [weak self] (token) in
+                guard let self = self else { return }
+                AuthManager.share.token = token
+                self.navigator.toMenu()
+            })
+            .mapToVoid()
 
         return Output(response: response,
                       validateEmail: triggerValidateEmail,

@@ -11,6 +11,7 @@ class BaseViewModel: NSObject { // swiftlint:disable:this final_class
     
     let error = ErrorTracker()
     let loading = ActivityIndicator()
+    let headerLoading = ActivityIndicator()
     
     override init() {
         super.init()

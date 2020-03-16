@@ -50,4 +50,10 @@ final class AppHelper {
         return viewController
     }
     
+    class func toDayString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        return dateFormatter.string(from: Date())
+    }
+    
 }

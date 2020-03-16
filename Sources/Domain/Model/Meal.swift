@@ -17,7 +17,7 @@ final class Meal: Codable {
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
-        case title = "tile"
+        case title = "title"
         case price = "price"
         case image = "image"
         case createdAt = "created_at"

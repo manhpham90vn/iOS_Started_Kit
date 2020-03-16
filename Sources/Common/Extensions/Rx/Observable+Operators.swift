@@ -20,5 +20,13 @@ extension ObservableType {
             return Observable.empty()
         }
     }
-
+    
+    func mapToVoid() -> Observable<Void> {
+        return map { _ in }
+    }
+    
+    func unwrap<Result>() -> Observable<Result> where Element == Result? {
+        return self.compactMap { $0 }
+    }
+    
 }

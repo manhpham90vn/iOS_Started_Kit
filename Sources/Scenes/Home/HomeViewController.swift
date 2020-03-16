@@ -29,10 +29,16 @@ final class HomeViewController: BaseViewController, BindableType {
     // MARK: - Methods
     private func configView() {
         title = "Home"
+        emailTextField.text = "test123@test.com"
+        passwordTextField.text = "123123"
     }
 
     func bindViewModel() {
-        viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
+        viewModel
+            .loading
+            .asObservable()
+            .bind(to: isLoading)
+            .disposed(by: rx.disposeBag)
         
         let input = HomeViewModel.Input(email: emailTextField.rx.text.orEmpty.asDriver(),
                                         password: passwordTextField.rx.text.orEmpty.asDriver(),
@@ -51,20 +57,7 @@ final class HomeViewController: BaseViewController, BindableType {
         
         output
             .response
-            .asObservable()
-            .filter({ $0.data != nil })
-            .subscribe(onNext: { (response) in
-                AppHelper.showMessage(title: "Token", message: "\(response.data?.accessToken ?? "")")
-            })
-            .disposed(by: rx.disposeBag)
-        
-        output
-            .response
-            .asObservable()
-            .filter({ $0.data != nil })
-            .subscribe(onNext: { (response) in
-                LogInfo(response.data?.profile?.description)
-            })
+            .drive()
             .disposed(by: rx.disposeBag)
     }
 }

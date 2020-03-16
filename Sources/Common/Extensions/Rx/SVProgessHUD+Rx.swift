@@ -9,7 +9,7 @@ import SVProgressHUD
 
 extension Reactive where Base: SVProgressHUD {
 
-   public static var isAnimating: Binder<Bool> {
+    static var isAnimating: Binder<Bool> {
       return Binder(UIApplication.shared) {_, isVisible in
          if isVisible {
             SVProgressHUD.show()
