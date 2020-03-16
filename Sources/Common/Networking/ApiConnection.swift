@@ -24,11 +24,7 @@ final class ApiConnection {
     
     private let provider = MoyaProvider<MultiTarget>(plugins: plugins).rx
     
-}
-
-extension ApiConnection {
-    
-    func request<T: Codable>(target: MultiTarget, type: T.Type) -> Single<ObjectResponse<T>> {
+    private func request<T: Codable>(target: MultiTarget, type: T.Type) -> Single<T> {
         return connectedToInternet()
             .timeout(Configs.share.apiTimeOut, scheduler: MainScheduler.instance)
             .filter({ $0 == true })
@@ -37,25 +33,22 @@ extension ApiConnection {
                 return self.provider
                     .request(target)
                     .timeout(Configs.share.apiTimeOut, scheduler: MainScheduler.instance)
-                    .map(ObjectResponse<T>.self)
+                    .map(T.self)
             })
             .observeOn(MainScheduler.instance)
             .asSingle()
     }
     
+}
+
+extension ApiConnection {
+    
+    func requestObject<T: Codable>(target: MultiTarget, type: T.Type) -> Single<ObjectResponse<T>> {
+        return request(target: target, type: ObjectResponse<T>.self)
+    }
+    
     func requestArray<T: Codable>(target: MultiTarget, type: T.Type) -> Single<ArrayResponse<T>> {
-        return connectedToInternet()
-            .timeout(Configs.share.apiTimeOut, scheduler: MainScheduler.instance)
-            .filter({ $0 == true })
-            .take(1)
-            .flatMap({ _ in
-                return self.provider
-                    .request(target)
-                    .timeout(Configs.share.apiTimeOut, scheduler: MainScheduler.instance)
-                    .map(ArrayResponse<T>.self)
-            })
-            .observeOn(MainScheduler.instance)
-            .asSingle()
+        return request(target: target, type: ArrayResponse<T>.self)
     }
     
 }

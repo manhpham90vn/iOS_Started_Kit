@@ -17,11 +17,11 @@ protocol Api {
 extension ApiConnection: Api {
     
     func login(email: String, password: String) -> Single<ObjectResponse<Login>> {
-        return request(target: MultiTarget(ApiRouter.login(email: email, password: password)), type: Login.self)
+        return requestObject(target: MultiTarget(ApiRouter.login(email: email, password: password)), type: Login.self)
     }
     
     func listMenu(date: String) -> Single<ObjectResponse<Menu>> {
-        return request(target: MultiTarget(ApiRouter.listMenu(date: date)), type: Menu.self)
+        return requestObject(target: MultiTarget(ApiRouter.listMenu(date: date)), type: Menu.self)
     }
     
 }

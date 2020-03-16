@@ -17,7 +17,7 @@ protocol BindableType: class {
     
 }
 
-extension BindableType where Self: UIViewController {
+extension BindableType where Self: BaseViewController {
     
     func bindViewModel(to model: Self.ViewModelType) {
         viewModel = model
