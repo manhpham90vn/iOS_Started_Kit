@@ -32,3 +32,21 @@ extension Meal: CustomStringConvertible {
     }
     
 }
+
+extension Meal: IdentifiableType {
+    
+    typealias Identity = Int
+    
+    var identity: Int {
+        return id ?? 0
+    }
+    
+}
+
+extension Meal: Equatable {
+    
+    static func == (lhs: Meal, rhs: Meal) -> Bool {
+        return lhs.id == rhs.id && lhs.title == rhs.title && lhs.price == rhs.price
+    }
+    
+}

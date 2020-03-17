@@ -40,3 +40,5 @@ targets:
         - carthage: XCGLogger
         - carthage: SVProgressHUD
         - carthage: ObjcExceptionBridging
+        - carthage: Differentiator
+        - carthage: RxDataSources

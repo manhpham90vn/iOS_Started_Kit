@@ -66,16 +66,26 @@ final class MenuViewController: BaseViewController, BindableType {
             .drive(isLoading)
             .disposed(by: rx.disposeBag)
         
+        let dataSource = RxTableViewSectionedAnimatedDataSource<DefaultSection>(
+            configureCell: { (_, tableView, indexPath, item) -> UITableViewCell in
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MenuTableViewCell.self)
+                cell.config(title: item.title, price: item.price)
+                return cell
+            }
+        )
+        
         let input = MenuViewModel.Input(loadTrigger: Driver.just(()),
                                         refreshTrigger: refreshControl.rx.controlEvent(.valueChanged).asDriver(),
                                         date: AppHelper.toDayString())
         let output = viewModel.transform(input)
         
-        output.items.drive(tableView.rx.items(cellIdentifier: MenuTableViewCell.reuseIdentifier,
-                                              cellType: MenuTableViewCell.self)) { _, element, cell in
-            cell.config(title: element.title, price: element.price)
-        }
-        .disposed(by: rx.disposeBag)
+        output
+            .items
+            .map { (meals) -> [DefaultSection] in
+                return [DefaultSection(id: 1, items: meals)]
+            }
+            .drive(tableView.rx.items(dataSource: dataSource))
+            .disposed(by: rx.disposeBag)
     }
 }
 
