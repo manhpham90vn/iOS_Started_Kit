@@ -8,16 +8,13 @@
 import Foundation
 
 enum LoginValidationError: ValidationError {
-    case emailMinLength
-    case emailFormat
+    case usernameMinLength
     case passwordMinLength
     
     var message: String {
         switch self {
-        case .emailMinLength:
-            return "Please enter your email."
-        case .emailFormat:
-            return "Please check your email format."
+        case .usernameMinLength:
+            return "Please enter your username."
         case .passwordMinLength:
             return "Please enter your password."
         }

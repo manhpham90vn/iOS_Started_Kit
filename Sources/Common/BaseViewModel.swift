@@ -30,8 +30,13 @@ class BaseViewModel: NSObject { // swiftlint:disable:this final_class
                     }
                 } else if let error = error as? Moya.MoyaError {
                     switch error {
-                    case .objectMapping:
-                        AppHelper.showMessage(title: "Error", message: "Map Data Error")
+                    case .objectMapping(_, let response), .jsonMapping(let response), .statusCode(let response):
+                        if let errorResponse = try? response.map(ErrorResponse.self),
+                            let message = errorResponse.message {
+                                AppHelper.showMessage(title: "Error", message: message)
+                        } else {
+                            AppHelper.showMessage(title: "Error", message: "Map Data Error of bad StatusCode")
+                        }
                     default:
                         AppHelper.showMessage(title: "Error", message: "Unknown Moya error occurred")
                     }

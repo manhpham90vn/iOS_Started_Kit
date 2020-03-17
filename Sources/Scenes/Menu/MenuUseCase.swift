@@ -8,16 +8,16 @@
 
 protocol MenuUseCaseType {
 
-    func listMenu(date: String) -> Single<ObjectResponse<Menu>>
+    func userReceivedEvents(username: String, page: Int) -> Single<[Event]>
     
 }
 
 struct MenuUseCase: MenuUseCaseType {
     
-    let repository: MenuRepositoryType
+    let repository: EventRepositoryType
     
-    func listMenu(date: String) -> Single<ObjectResponse<Menu>> {
-        repository.listMenu(date: date)
+    func userReceivedEvents(username: String, page: Int) -> Single<[Event]> {
+        return repository.userReceivedEvents(username: username, page: page)
     }
     
 }

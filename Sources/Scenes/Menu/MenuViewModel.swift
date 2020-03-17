@@ -21,11 +21,10 @@ extension MenuViewModel: ViewModelType {
     struct Input {
         let loadTrigger: Driver<Void>
         let refreshTrigger: Driver<Void>
-        let date: String
     }
 
     struct Output {
-        let items: Driver<[Meal]>
+        let items: Driver<[Event]>
     }
 
     func transform(_ input: Input) -> Output {
@@ -33,16 +32,15 @@ extension MenuViewModel: ViewModelType {
         let trigger = Driver.merge(input.loadTrigger, input.refreshTrigger)
            
         let items = trigger
-            .flatMapLatest({ [weak self] _ -> Driver<ObjectResponse<Menu>> in
+            .flatMapLatest({ [weak self] _ -> Driver<[Event]> in
                 guard let self = self else { return Driver.empty() }
                 return self.useCase
-                    .listMenu(date: input.date)
-                    .trackError(self.error, type: Menu.self)
+                .userReceivedEvents(username: "111", page: 1)
+                    .trackError(self.error)
                     .trackActivity(self.loading)
                     .trackActivity(self.headerLoading)
                     .asDriverOnErrorJustComplete()
             })
-            .map({ $0.data?.meals ?? [] })
         
         return Output(items: items)
     }

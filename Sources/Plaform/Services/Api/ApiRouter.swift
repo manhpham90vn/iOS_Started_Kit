@@ -9,8 +9,8 @@ import Foundation
 import Moya
 
 enum ApiRouter {
-    case login(email: String, password: String)
-    case listMenu(date: String)
+    case login
+    case userReceivedEvents(username: String, page: Int)
 }
 
 extension ApiRouter: TargetType {
@@ -22,19 +22,14 @@ extension ApiRouter: TargetType {
     var path: String {
         switch self {
         case .login:
-            return "auth/login"
-        case .listMenu:
-            return "meals/get-menu"
+            return "/user"
+        case .userReceivedEvents(let username, _):
+            return "/user/\(username)/received_events"
         }
     }
     
     var method: Moya.Method {
-        switch self {
-        case .login:
-            return .post
-        case .listMenu:
-            return .get
-        }
+        return .get
     }
     
     var sampleData: Data {
@@ -50,7 +45,7 @@ extension ApiRouter: TargetType {
     
     var headers: [String: String]? {
         if let token = AuthManager.share.token {
-            return ["Authorization": "Bearer \(token)"]
+            return ["Authorization": "Basic \(token)"]
         }
         return nil
     }
@@ -58,11 +53,10 @@ extension ApiRouter: TargetType {
     var parameters: [String: Any]? {
         var params: [String: Any] = [:]
         switch self {
-        case .login(let email, let password): // swiftlint:disable:this pattern_matching_keywords
-            params["email"] = email
-            params["password"] = password
-        case .listMenu(let date):
-            params["date"] = date
+        case .login:
+            return nil
+        case .userReceivedEvents(_, let page):
+            params["page"] = page
         }
         return params
     }

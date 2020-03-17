@@ -49,11 +49,9 @@ final class AppHelper {
         }
         return viewController
     }
-    
-    class func toDayString() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-dd"
-        return dateFormatter.string(from: Date())
+        
+    class func base64Encode(value: String) -> String {
+        return value.data(using: .utf8)?.base64EncodedString() ?? ""
     }
     
 }

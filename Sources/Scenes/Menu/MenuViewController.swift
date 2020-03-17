@@ -69,14 +69,13 @@ final class MenuViewController: BaseViewController, BindableType {
         let dataSource = RxTableViewSectionedAnimatedDataSource<DefaultSection>(
             configureCell: { (_, tableView, indexPath, item) -> UITableViewCell in
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MenuTableViewCell.self)
-                cell.config(title: item.title, price: item.price)
+                cell.config(title: item.actor?.login, subtitle: item.repo?.name, subDescription: item.type)
                 return cell
             }
         )
         
         let input = MenuViewModel.Input(loadTrigger: Driver.just(()),
-                                        refreshTrigger: refreshControl.rx.controlEvent(.valueChanged).asDriver(),
-                                        date: AppHelper.toDayString())
+                                        refreshTrigger: refreshControl.rx.controlEvent(.valueChanged).asDriver())
         let output = viewModel.transform(input)
         
         output
@@ -92,7 +91,7 @@ final class MenuViewController: BaseViewController, BindableType {
 extension MenuViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 80
     }
     
 }

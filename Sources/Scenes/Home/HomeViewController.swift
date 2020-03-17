@@ -40,8 +40,6 @@ final class HomeViewController: BaseViewController, BindableType {
     // MARK: - Methods
     private func configView() {
         title = "Home"
-        emailTextField.text = "test123@test.com"
-        passwordTextField.text = "123123"
     }
 
     func bindViewModel() {
@@ -52,7 +50,7 @@ final class HomeViewController: BaseViewController, BindableType {
             .drive(isLoading)
             .disposed(by: rx.disposeBag)
         
-        let input = HomeViewModel.Input(email: emailTextField.rx.text.orEmpty.asDriver(),
+        let input = HomeViewModel.Input(username: emailTextField.rx.text.orEmpty.asDriver(),
                                         password: passwordTextField.rx.text.orEmpty.asDriver(),
                                         trigger: tapButton.rx.tap.asDriver())
         let output = viewModel.transform(input)

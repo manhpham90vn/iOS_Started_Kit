@@ -8,8 +8,8 @@
 
 protocol HomeUseCaseType {
     
-    func login(email: String, password: String) -> Single<ObjectResponse<Login>>
-    func validate(email: String) -> ValidationResult
+    func login() -> Single<User>
+    func validate(username: String) -> ValidationResult
     func validate(password: String) -> ValidationResult
     
 }
@@ -18,20 +18,13 @@ struct HomeUseCase: HomeUseCaseType {
     
     let repository: UserRepositoryType
     
-    func login(email: String, password: String) -> Single<ObjectResponse<Login>> {
-        repository.login(email: email, password: password)
+    func login() -> Single<User> {
+        repository.login()
     }
     
-    func validate(email: String) -> ValidationResult {
-        var rule = ValidationRuleSet<String>()
-        let minLengthRule = ValidationRuleLength(min: 1,
-                                                 error: LoginValidationError.emailMinLength)
-        let emailRule = ValidationRulePattern(pattern: EmailValidationPattern.simple,
-                                              error: LoginValidationError.emailFormat)
-        rule.add(rule: minLengthRule)
-        rule.add(rule: emailRule)
-        
-        return email.validate(rules: rule)
+    func validate(username: String) -> ValidationResult {
+        let minLengthRule = ValidationRuleLength(min: 1, error: LoginValidationError.usernameMinLength)
+        return username.validate(rule: minLengthRule)
     }
     
     func validate(password: String) -> ValidationResult {

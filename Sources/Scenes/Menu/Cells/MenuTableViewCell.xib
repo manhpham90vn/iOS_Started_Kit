@@ -21,13 +21,19 @@
                         <rect key="frame" x="20" y="0.0" width="380" height="96"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JNQ-yc-y4Q">
-                                <rect key="frame" x="0.0" y="0.0" width="380" height="48"/>
+                                <rect key="frame" x="0.0" y="0.0" width="380" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aQA-yJ-Tse">
+                                <rect key="frame" x="0.0" y="32" width="380" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9t-T8-Cs2">
-                                <rect key="frame" x="0.0" y="48" width="380" height="48"/>
+                                <rect key="frame" x="0.0" y="64" width="380" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -44,7 +50,8 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="priceLabel" destination="D9t-T8-Cs2" id="fTn-Hr-xVv"/>
+                <outlet property="subDescription" destination="D9t-T8-Cs2" id="Dhr-Ta-vdQ"/>
+                <outlet property="subTitle" destination="aQA-yJ-Tse" id="gM1-77-MEM"/>
                 <outlet property="titleLabel" destination="JNQ-yc-y4Q" id="5WA-FJ-rvu"/>
             </connections>
             <point key="canvasLocation" x="73.913043478260875" y="154.01785714285714"/>

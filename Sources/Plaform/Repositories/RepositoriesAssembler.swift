@@ -7,7 +7,7 @@
 
 protocol RepositoriesAssembler {
     func resolve() -> UserRepositoryType
-    func resolve() -> MenuRepositoryType
+    func resolve() -> EventRepositoryType
 }
 
 extension RepositoriesAssembler where Self: DefaultAssembler {
@@ -16,8 +16,8 @@ extension RepositoriesAssembler where Self: DefaultAssembler {
         return UserRepository()
     }
     
-    func resolve() -> MenuRepositoryType {
-        return MenuRepository()
+    func resolve() -> EventRepositoryType {
+        return EventRepository()
     }
     
 }

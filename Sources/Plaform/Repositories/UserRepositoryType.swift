@@ -6,15 +6,13 @@
 //
 
 protocol UserRepositoryType {
-    
-    func login(email: String, password: String) -> Single<ObjectResponse<Login>>
-    
+    func login() -> Single<User>
 }
 
 struct UserRepository: UserRepositoryType {
     
-    func login(email: String, password: String) -> Single<ObjectResponse<Login>> {
-        return ApiConnection.share.login(email: email, password: password)
+    func login() -> Single<User> {
+        return ApiConnection.share.login()
     }
     
 }

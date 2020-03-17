@@ -21,7 +21,7 @@ final class HomeViewModel: BaseViewModel {
 // MARK: - ViewModelType
 extension HomeViewModel: ViewModelType {
     struct Input {
-        let email: Driver<String>
+        let username: Driver<String>
         let password: Driver<String>
         let trigger: Driver<Void>
     }
@@ -34,18 +34,17 @@ extension HomeViewModel: ViewModelType {
 
     func transform(_ input: Input) -> Output {
         
-        let validateEmail = input.email.map({ self.useCase.validate(email: $0) })
+        let validateUsername = input.username.map({ self.useCase.validate(username: $0) })
         let validatePassword = input.password.map({ self.useCase.validate(password: $0) })
-        let isValidateEmail = validateEmail.map({ $0.isValid })
+        let isValidateEmail = validateUsername.map({ $0.isValid })
         let isValidatePassword = validatePassword.map({ $0.isValid })
         let isValidate = Driver
                                 .combineLatest(isValidateEmail,
-                                               isValidatePassword)
-                                .map({ $0 && $01 })
+                                               isValidatePassword) { $0 && $1 }
                 
         let triggerValidateEmail = input
                                 .trigger
-                                .withLatestFrom(validateEmail)
+                                .withLatestFrom(validateUsername)
         
         let triggerValidatePassword = input
                                 .trigger
@@ -58,22 +57,23 @@ extension HomeViewModel: ViewModelType {
             .trigger
             .withLatestFrom(isValidate)
             .filter({ $0 == true })
-            .withLatestFrom(Driver.combineLatest(input.email, input.password))
-            .flatMapLatest({ [weak self] (email, password) -> Driver<ObjectResponse<Login>> in
+            .withLatestFrom(Driver.combineLatest(input.username, input.password))
+            .map({ AppHelper.base64Encode(value: "\($0):\($1)") })
+            .do(onNext: { (token) in
+                AuthManager.share.token = token
+            })
+            .flatMapLatest({ [weak self] _ -> Driver<User> in
                 guard let self = self else { return Driver.empty() }
-                return self.useCase.login(email: email, password: password)
-                    .trackError(self.error, type: Login.self)
+                return self.useCase.login()
+                    .trackError(self.error)
                     .trackActivity(self.loading)
                     .asDriverOnErrorJustComplete()
             })
-            .map({ $0.data?.accessToken })
-            .unwrap()
-            .do(onNext: { [weak self] (token) in
+            .mapToVoid()
+            .do(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                AuthManager.share.token = token
                 self.navigator.toMenu()
             })
-            .mapToVoid()
 
         return Output(response: response,
                       validateEmail: triggerValidateEmail,

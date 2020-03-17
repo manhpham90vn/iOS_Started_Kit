@@ -9,28 +9,20 @@ import Foundation
 
 final class User: Codable {
     
-    var id: Int?
+    var id: Double?
+    var name: String?
+    var login: String?
     var email: String?
-    var phone: String?
-    var fullName: String?
-    var createdAt: Double?
     var avatar: String?
+    var url: String?
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
+        case name = "name"
+        case login = "login"
         case email = "email"
-        case phone = "phone"
-        case fullName = "full_name"
-        case createdAt = "created_at"
-        case avatar = "avatar"
-    }
-    
-}
-
-extension User: CustomStringConvertible {
-    
-    var description: String {
-        return AppHelper.convert(self)
+        case avatar = "avatar_url"
+        case url = "url"
     }
     
 }

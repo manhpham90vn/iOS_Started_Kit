@@ -8,20 +8,20 @@
 import Moya
 
 protocol Api {
-    
-    func login(email: String, password: String) -> Single<ObjectResponse<Login>>
-    func listMenu(date: String) -> Single<ObjectResponse<Menu>>
-    
+    func login() -> Single<User>
+    func userReceivedEvents(username: String, page: Int) -> Single<[Event]>
 }
 
 extension ApiConnection: Api {
-    
-    func login(email: String, password: String) -> Single<ObjectResponse<Login>> {
-        return requestObject(target: MultiTarget(ApiRouter.login(email: email, password: password)), type: Login.self)
+
+    func login() -> Single<User> {
+        return request(target: MultiTarget(ApiRouter.login), type: User.self)
     }
     
-    func listMenu(date: String) -> Single<ObjectResponse<Menu>> {
-        return requestObject(target: MultiTarget(ApiRouter.listMenu(date: date)), type: Menu.self)
+    func userReceivedEvents(username: String, page: Int) -> Single<[Event]> {
+        return requestArray(target: MultiTarget(ApiRouter.userReceivedEvents(username: username,
+                                                                             page: page)),
+                            type: Event.self)
     }
     
 }

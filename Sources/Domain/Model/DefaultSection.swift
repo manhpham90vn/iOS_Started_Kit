@@ -10,20 +10,20 @@ import Foundation
 struct DefaultSection {
     
     var id: Int
-    var items: [Meal]
+    var items: [Event]
     
 }
 
 extension DefaultSection: AnimatableSectionModelType {
     
-    typealias Item = Meal
+    typealias Item = Event
     typealias Identity = Int
     
     var identity: Int {
         return id
     }
     
-    init(original: DefaultSection, items: [Item]) {
+    init(original: DefaultSection, items: [Event]) {
         self = original
         self.items = items
     }
