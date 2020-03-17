@@ -9,20 +9,12 @@ import UIKit
 
 protocol BindableType: class {
     
-    associatedtype ViewModelType
+    associatedtype ViewModel: ViewModelType
     
-    var viewModel: ViewModelType! { get set }
+    var viewModel: ViewModel { get set }
+    
+    init(viewModel: Self.ViewModel)
     
     func bindViewModel()
-    
-}
-
-extension BindableType where Self: BaseViewController {
-    
-    func bindViewModel(to model: Self.ViewModelType) {
-        viewModel = model
-        loadViewIfNeeded()
-        bindViewModel()
-    }
     
 }

@@ -17,9 +17,8 @@ protocol MenuAssembler {
 
 extension MenuAssembler {
     func resolve(navigationController: BaseNavigationController) -> MenuViewController {
-        let vc = MenuViewController.instantiate()
         let vm: MenuViewModel = resolve(navigationController: navigationController)
-        vc.bindViewModel(to: vm)
+        let vc = MenuViewController(viewModel: vm)
         return vc
     }
 

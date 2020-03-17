@@ -17,9 +17,8 @@ protocol HomeAssembler {
 
 extension HomeAssembler {
     func resolve(navigationController: BaseNavigationController) -> HomeViewController {
-        let vc = HomeViewController.instantiate()
         let vm: HomeViewModel = resolve(navigationController: navigationController)
-        vc.bindViewModel(to: vm)
+        let vc = HomeViewController(viewModel: vm)
         return vc
     }
 

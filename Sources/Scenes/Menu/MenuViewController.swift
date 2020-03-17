@@ -15,8 +15,18 @@ final class MenuViewController: BaseViewController, BindableType {
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Properties
-    var viewModel: MenuViewModel!
+    var viewModel: MenuViewModel
 
+    init(viewModel: MenuViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         return refreshControl
@@ -26,6 +36,7 @@ final class MenuViewController: BaseViewController, BindableType {
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
+        bindViewModel()
     }
     
     // MARK: - Methods
@@ -55,7 +66,7 @@ final class MenuViewController: BaseViewController, BindableType {
 
     func bindViewModel() {
         
-        let trigger = Observable.merge(rx.viewWillAppear.mapToVoid(),
+        let trigger = Observable.merge(Observable.just(()),
                                        refreshControl.rx.controlEvent(.valueChanged).asObservable())
         let input = MenuViewModel.Input(trigger: trigger.asDriverOnErrorJustComplete(),
                                         date: AppHelper.toDayString())
