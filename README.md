@@ -41,6 +41,8 @@ and run
 install.sh
 ```
 
+and try it with your github account
+
 # Reference
 1. [CleanArchitectureRxSwift](https://github.com/sergdort/CleanArchitectureRxSwift)
 2. [Dependency Injection in Swift](https://medium.com/makingtuenti/dependency-injection-in-swift-part-1-236fddad144a)
