@@ -45,6 +45,7 @@ final class HomeViewController: BaseViewController, BindableType {
     }
 
     func bindViewModel() {
+        
         viewModel
             .loading
             .asDriver()

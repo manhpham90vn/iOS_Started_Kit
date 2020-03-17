@@ -19,7 +19,8 @@ final class MenuViewModel: BaseViewModel {
 // MARK: - ViewModelType
 extension MenuViewModel: ViewModelType {
     struct Input {
-        let trigger: Driver<Void>
+        let loadTrigger: Driver<Void>
+        let refreshTrigger: Driver<Void>
         let date: String
     }
 
@@ -29,18 +30,19 @@ extension MenuViewModel: ViewModelType {
 
     func transform(_ input: Input) -> Output {
         
-        let items = input
-        .trigger
-        .flatMapLatest({ [weak self] _ -> Driver<ObjectResponse<Menu>> in
-            guard let self = self else { return Driver.empty() }
-            return self.useCase
-                .listMenu(date: input.date)
-                .trackError(self.error, type: Menu.self)
-                .trackActivity(self.loading)
-                .trackActivity(self.headerLoading)
-                .asDriverOnErrorJustComplete()
-        })
-        .map({ $0.data?.meals ?? [] })
+        let trigger = Driver.merge(input.loadTrigger, input.refreshTrigger)
+           
+        let items = trigger
+            .flatMapLatest({ [weak self] _ -> Driver<ObjectResponse<Menu>> in
+                guard let self = self else { return Driver.empty() }
+                return self.useCase
+                    .listMenu(date: input.date)
+                    .trackError(self.error, type: Menu.self)
+                    .trackActivity(self.loading)
+                    .trackActivity(self.headerLoading)
+                    .asDriverOnErrorJustComplete()
+            })
+            .map({ $0.data?.meals ?? [] })
         
         return Output(items: items)
     }

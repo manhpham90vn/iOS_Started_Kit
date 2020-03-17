@@ -51,6 +51,9 @@ final class MenuViewController: BaseViewController, BindableType {
             .rx
             .setDelegate(self)
             .disposed(by: rx.disposeBag)
+    }
+
+    func bindViewModel() {
         
         viewModel
             .headerLoading
@@ -62,13 +65,9 @@ final class MenuViewController: BaseViewController, BindableType {
             .asDriver()
             .drive(isLoading)
             .disposed(by: rx.disposeBag)
-    }
-
-    func bindViewModel() {
         
-        let trigger = Observable.merge(Observable.just(()),
-                                       refreshControl.rx.controlEvent(.valueChanged).asObservable())
-        let input = MenuViewModel.Input(trigger: trigger.asDriverOnErrorJustComplete(),
+        let input = MenuViewModel.Input(loadTrigger: Driver.just(()),
+                                        refreshTrigger: refreshControl.rx.controlEvent(.valueChanged).asDriver(),
                                         date: AppHelper.toDayString())
         let output = viewModel.transform(input)
         
