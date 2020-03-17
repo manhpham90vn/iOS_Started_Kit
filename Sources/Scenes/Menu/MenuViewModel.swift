@@ -35,7 +35,7 @@ extension MenuViewModel: ViewModelType {
             .flatMapLatest({ [weak self] _ -> Driver<[Event]> in
                 guard let self = self else { return Driver.empty() }
                 return self.useCase
-                .userReceivedEvents(username: "111", page: 1)
+                    .userReceivedEvents(username: AuthManager.share.user?.login ?? "", page: 1)
                     .trackError(self.error)
                     .trackActivity(self.loading)
                     .trackActivity(self.headerLoading)

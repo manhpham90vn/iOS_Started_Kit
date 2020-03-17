@@ -69,6 +69,9 @@ extension HomeViewModel: ViewModelType {
                     .trackActivity(self.loading)
                     .asDriverOnErrorJustComplete()
             })
+            .do(onNext: { (user) in
+                AuthManager.share.user = user
+            })
             .mapToVoid()
             .do(onNext: { [weak self] _ in
                 guard let self = self else { return }

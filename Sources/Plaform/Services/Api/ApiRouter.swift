@@ -24,7 +24,7 @@ extension ApiRouter: TargetType {
         case .login:
             return "/user"
         case .userReceivedEvents(let username, _):
-            return "/user/\(username)/received_events"
+            return "/users/\(username)/received_events"
         }
     }
     
