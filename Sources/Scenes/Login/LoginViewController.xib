@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="MyApp" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="MyApp" customModuleProvider="target">
             <connections>
                 <outlet property="emailTextField" destination="Nan-8A-Jqg" id="rJz-np-PAh"/>
                 <outlet property="passwordTextField" destination="phj-Lk-cCN" id="0jC-Zp-xqi"/>

@@ -1,18 +1,18 @@
 //
-//  MenuUseCase.swift
+//  EventUseCase.swift
 //  My Project
 //
 //  Created by Manh Pham on 3/16/20.
 //  Copyright © 2020 Fujitech. All rights reserved.
 //
 
-protocol MenuUseCaseType {
+protocol EventUseCaseType {
 
     func userReceivedEvents(username: String, page: Int) -> Single<[Event]>
     
 }
 
-struct MenuUseCase: MenuUseCaseType {
+struct EventUseCase: EventUseCaseType {
     
     let repository: EventRepositoryType
     

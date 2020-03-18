@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  LoginViewController.swift
 //  My Project
 //
 //  Created by Manh Pham on 3/12/20.
@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import Reusable
 
-final class HomeViewController: BaseViewController, BindableType {
+final class LoginViewController: BaseViewController, BindableType {
         
     // MARK: - IBOutlets
     @IBOutlet weak var tapButton: UIButton!
@@ -17,9 +16,9 @@ final class HomeViewController: BaseViewController, BindableType {
     @IBOutlet weak var passwordTextField: UITextField!
     
     // MARK: - Properties
-    var viewModel: HomeViewModel
+    var viewModel: LoginViewModel
 
-    init(viewModel: HomeViewModel) {
+    init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -39,7 +38,7 @@ final class HomeViewController: BaseViewController, BindableType {
     
     // MARK: - Methods
     private func configView() {
-        title = "Home"
+        title = "Login Github"
     }
 
     func bindViewModel() {
@@ -50,14 +49,15 @@ final class HomeViewController: BaseViewController, BindableType {
             .drive(isLoading)
             .disposed(by: rx.disposeBag)
         
-        let input = HomeViewModel.Input(username: emailTextField.rx.text.orEmpty.asDriver(),
-                                        password: passwordTextField.rx.text.orEmpty.asDriver(),
-                                        trigger: tapButton.rx.tap.asDriver())
+        let input = LoginViewModel.Input(username: emailTextField.rx.text.orEmpty.asDriver(),
+                                         password: passwordTextField.rx.text.orEmpty.asDriver(),
+                                         trigger: tapButton.rx.tap.asDriver())
+        
         let output = viewModel.transform(input)
     
         output
             .validateEmail
-            .drive(emailValidationBinder)
+            .drive(usernameValidationBinder)
             .disposed(by: rx.disposeBag)
         
         output
@@ -73,8 +73,8 @@ final class HomeViewController: BaseViewController, BindableType {
 }
 
 // MARK: - Binders
-extension HomeViewController {
-    var emailValidationBinder: Binder<ValidationResult> {
+extension LoginViewController {
+    var usernameValidationBinder: Binder<ValidationResult> {
         return Binder(self) { vc, result in
             switch result {
             case .valid:

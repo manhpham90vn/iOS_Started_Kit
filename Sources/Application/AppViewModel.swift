@@ -30,7 +30,7 @@ extension AppViewModel: ViewModelType {
     func transform(_ input: Input) -> Output {
         let toMain = input.loadTrigger
             .do(onNext: { _ in
-                self.navigator.toHome()
+                self.navigator.toLogin()
             })
         
         return Output(toMain: toMain)

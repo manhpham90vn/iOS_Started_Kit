@@ -1,5 +1,5 @@
 //
-//  MenuTableViewCell.swift
+//  EventTableViewCell.swift
 //  MyApp
 //
 //  Created by Manh Pham on 3/16/20.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MenuTableViewCell: UITableViewCell, NibReusable {
+final class EventTableViewCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitle: UILabel!

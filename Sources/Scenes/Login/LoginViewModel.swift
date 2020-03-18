@@ -1,17 +1,17 @@
 //
-//  HomeViewModel.swift
+//  LoginViewModel.swift
 //  My Project
 //
 //  Created by Manh Pham on 3/12/20.
 //  Copyright © 2020 Fujitech. All rights reserved.
 //
 
-final class HomeViewModel: BaseViewModel {
+final class LoginViewModel: BaseViewModel {
     
-    let navigator: HomeNavigatorType
-    let useCase: HomeUseCaseType
+    let navigator: LoginNavigatorType
+    let useCase: LoginUseCaseType
     
-    init(navigator: HomeNavigatorType, useCase: HomeUseCaseType) {
+    init(navigator: LoginNavigatorType, useCase: LoginUseCaseType) {
         self.navigator = navigator
         self.useCase = useCase
     }
@@ -19,7 +19,7 @@ final class HomeViewModel: BaseViewModel {
 }
 
 // MARK: - ViewModelType
-extension HomeViewModel: ViewModelType {
+extension LoginViewModel: ViewModelType {
     struct Input {
         let username: Driver<String>
         let password: Driver<String>
@@ -77,7 +77,7 @@ extension HomeViewModel: ViewModelType {
             .mapToVoid()
             .do(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                self.navigator.toMenu()
+                self.navigator.toEvent()
             })
 
         return Output(response: response,

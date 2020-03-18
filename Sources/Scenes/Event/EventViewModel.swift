@@ -1,23 +1,23 @@
 //
-//  MenuViewModel.swift
+//  EventViewModel.swift
 //  My Project
 //
 //  Created by Manh Pham on 3/16/20.
 //  Copyright © 2020 Fujitech. All rights reserved.
 //
 
-final class MenuViewModel: BaseViewModel {
-    let navigator: MenuNavigatorType
-    let useCase: MenuUseCaseType
+final class EventViewModel: BaseViewModel {
+    let navigator: EventNavigatorType
+    let useCase: EventUseCaseType
     
-    init(navigator: MenuNavigatorType, useCase: MenuUseCaseType) {
+    init(navigator: EventNavigatorType, useCase: EventUseCaseType) {
         self.navigator = navigator
         self.useCase = useCase
     }
 }
 
 // MARK: - ViewModelType
-extension MenuViewModel: ViewModelType {
+extension EventViewModel: ViewModelType {
     struct Input {
         let loadTrigger: Driver<Void>
         let refreshTrigger: Driver<Void>

@@ -1,12 +1,12 @@
 //
-//  HomeUseCase.swift
+//  LoginUseCase.swift
 //  My Project
 //
 //  Created by Manh Pham on 3/12/20.
 //  Copyright © 2020 Fujitech. All rights reserved.
 //
 
-protocol HomeUseCaseType {
+protocol LoginUseCaseType {
     
     func login() -> Single<User>
     func validate(username: String) -> ValidationResult
@@ -14,7 +14,7 @@ protocol HomeUseCaseType {
     
 }
 
-struct HomeUseCase: HomeUseCaseType {
+struct LoginUseCase: LoginUseCaseType {
     
     let repository: UserRepositoryType
     

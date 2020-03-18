@@ -1,5 +1,5 @@
 //
-//  MenuViewController.swift
+//  EventViewController.swift
 //  My Project
 //
 //  Created by Manh Pham on 3/16/20.
@@ -7,17 +7,16 @@
 //
 
 import UIKit
-import Reusable
 
-final class MenuViewController: BaseViewController, BindableType {
+final class EventViewController: BaseViewController, BindableType {
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Properties
-    var viewModel: MenuViewModel
+    var viewModel: EventViewModel
 
-    init(viewModel: MenuViewModel) {
+    init(viewModel: EventViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -41,11 +40,11 @@ final class MenuViewController: BaseViewController, BindableType {
     
     // MARK: - Methods
     private func configView() {
-        title = "Menu"
+        title = "Events"
         navigationItem.setHidesBackButton(true, animated: false)
         
         tableView.addSubview(refreshControl)
-        tableView.register(cellType: MenuTableViewCell.self)
+        tableView.register(cellType: EventTableViewCell.self)
         
         tableView
             .rx
@@ -68,14 +67,14 @@ final class MenuViewController: BaseViewController, BindableType {
         
         let dataSource = RxTableViewSectionedAnimatedDataSource<DefaultSection>(
             configureCell: { (_, tableView, indexPath, item) -> UITableViewCell in
-                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MenuTableViewCell.self)
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: EventTableViewCell.self)
                 cell.config(title: item.actor?.login, subtitle: item.repo?.name, subDescription: item.type)
                 return cell
             }
         )
         
-        let input = MenuViewModel.Input(loadTrigger: Driver.just(()),
-                                        refreshTrigger: refreshControl.rx.controlEvent(.valueChanged).asDriver())
+        let input = EventViewModel.Input(loadTrigger: Driver.just(()),
+                                         refreshTrigger: refreshControl.rx.controlEvent(.valueChanged).asDriver())
         let output = viewModel.transform(input)
         
         output
@@ -88,7 +87,7 @@ final class MenuViewController: BaseViewController, BindableType {
     }
 }
 
-extension MenuViewController: UITableViewDelegate {
+extension EventViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80

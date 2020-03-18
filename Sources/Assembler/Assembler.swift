@@ -6,8 +6,8 @@
 //
 
 protocol Assembler: class, AppAssembler, RepositoriesAssembler,
-    HomeAssembler,
-    MenuAssembler {
+    LoginAssembler,
+    EventAssembler {
     
 }
 

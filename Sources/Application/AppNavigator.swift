@@ -8,16 +8,16 @@
 import UIKit
 
 protocol AppNavigatorType {
-    func toHome()
+    func toLogin()
 }
 
 struct AppNavigator: AppNavigatorType {
     unowned let assembler: Assembler
     unowned let window: UIWindow
     
-    func toHome() {
+    func toLogin() {
         let nav = BaseNavigationController()
-        let vc: HomeViewController = assembler.resolve(navigationController: nav)
+        let vc: LoginViewController = assembler.resolve(navigationController: nav)
         nav.viewControllers = [vc]
         window.rootViewController = nav
     }
