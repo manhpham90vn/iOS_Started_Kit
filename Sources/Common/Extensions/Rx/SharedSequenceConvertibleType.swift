@@ -16,3 +16,11 @@ extension SharedSequenceConvertibleType {
     }
     
 }
+
+extension SharedSequenceConvertibleType where Element == Bool {
+    
+    func not() -> SharedSequence<SharingStrategy, Bool> {
+        return self.map(!)
+    }
+    
+}

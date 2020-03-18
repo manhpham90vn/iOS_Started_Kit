@@ -30,3 +30,11 @@ extension ObservableType {
     }
     
 }
+
+extension ObservableType where Element == Bool {
+    
+    func not() -> Observable<Bool> {
+        return self.map(!)
+    }
+    
+}

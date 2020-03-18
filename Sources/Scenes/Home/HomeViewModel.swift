@@ -53,9 +53,11 @@ extension HomeViewModel: ViewModelType {
                                 .skipUntil(isValidateEmail.asObservable().filter({ $0 == true }))
                                 .asDriverOnErrorJustComplete()
         
+        let isLoginEnabled = Driver.combineLatest(isValidate, loading.asDriver().not()) { $0 && $1 }
+        
         let response = input
             .trigger
-            .withLatestFrom(isValidate)
+            .withLatestFrom(isLoginEnabled)
             .filter({ $0 == true })
             .withLatestFrom(Driver.combineLatest(input.username, input.password))
             .map({ AppHelper.base64Encode(value: "\($0):\($1)") })
