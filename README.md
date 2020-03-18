@@ -6,6 +6,16 @@ iOS Started Kit: Clean Architecture + RxSwift + Moya
 - [x] Networking with Moya
 - [x] Map object with Codable
 
+# Todo
+- [ ] Add Event detail
+- [ ] Paging Event list
+- [ ] Handle loggined state
+- [ ] Cache Request
+- [ ] Support [Action](https://github.com/RxSwiftCommunity/Action)
+- [ ] Create generator code tools
+- [ ] Write Unit Test
+- [ ] Refactor install.sh
+
 # How to use
 You need
 1. [XcodeGen](https://github.com/yonaskolb/XcodeGen)
