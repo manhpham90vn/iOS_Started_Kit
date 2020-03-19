@@ -7,8 +7,8 @@ iOS Started Kit: Clean Architecture + RxSwift + Moya
 - [x] Map object with Codable
 
 # Todo
+- [x ] Paging Event list
 - [ ] Add Event detail
-- [ ] Paging Event list
 - [ ] Handle loggined state
 - [ ] Cache Request
 - [ ] Support [Action](https://github.com/RxSwiftCommunity/Action)

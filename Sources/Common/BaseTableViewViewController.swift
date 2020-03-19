@@ -12,8 +12,8 @@ class BaseTableViewViewController: BaseViewController { // swiftlint:disable:thi
 
     let headerRefreshTrigger = PublishSubject<Void>()
     let footerLoadMoreTrigger = PublishSubject<Void>()
-    let noticeNoMoreData = PublishSubject<Void>()
     
+    let isEnableLoadMore = BehaviorRelay(value: true)
     let isHeaderLoading = BehaviorRelay(value: false)
     let isFooterLoading = BehaviorRelay(value: false)
     
@@ -30,18 +30,30 @@ class BaseTableViewViewController: BaseViewController { // swiftlint:disable:thi
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { [weak self] in
             self?.footerLoadMoreTrigger.onNext(())
         })
-        isFooterLoading.takeUntil(noticeNoMoreData).debug().bind(to: isAnimatingFooter).disposed(by: rx.disposeBag) //TODO: fix Me
         
-        noticeNoMoreData
-            .subscribe(onNext: { [weak self] _ in
-                self?.tableView.mj_footer?.endRefreshingWithNoMoreData()
+        isFooterLoading
+            .filter({ [weak self] _ in
+                self?.isEnableLoadMore.value == true
             })
+            .bind(to: isAnimatingFooter)
             .disposed(by: rx.disposeBag)
+        
+        isEnableLoadMore.bind(to: isEnableLoadMoreBinder).disposed(by: rx.disposeBag)
     }
     
 }
 
 extension BaseTableViewViewController {
+    
+    private var isEnableLoadMoreBinder: Binder<Bool> {
+        return Binder(self) { viewController, enable in
+            if enable {
+                viewController.tableView.mj_footer?.resetNoMoreData()
+            } else {
+                viewController.tableView.mj_footer?.endRefreshingWithNoMoreData()
+            }
+        }
+    }
     
     private var isAnimatingHeader: Binder<Bool> {
         return Binder(self) { viewController, loading in

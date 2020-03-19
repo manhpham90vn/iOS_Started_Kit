@@ -82,8 +82,8 @@ final class EventViewController: BaseTableViewViewController, BindableType {
             .disposed(by: rx.disposeBag)
         
         output
-            .noticeNoMoreData
-            .drive(noticeNoMoreData)
+            .isEnableLoadMore
+            .drive(isEnableLoadMore)
             .disposed(by: rx.disposeBag)
     }
 }

@@ -26,13 +26,13 @@ extension EventViewModel: ViewModelType {
 
     struct Output {
         let items: Driver<[DefaultSection]>
-        let noticeNoMoreData: Driver<Void>
+        let isEnableLoadMore: Driver<Bool>
     }
 
     func transform(_ input: Input) -> Output {
         
         let elements = BehaviorRelay<[DefaultSection]>(value: [])
-        let noticeNoMoreData = PublishSubject<Void>()
+        let isEnableLoadMore = PublishSubject<Bool>()
         
         input
             .loadTrigger
@@ -55,12 +55,15 @@ extension EventViewModel: ViewModelType {
             .flatMapLatest({ [weak self] () -> Driver<[Event]> in
                 guard let self = self else { return Driver.just([]) }
                 self.currentPage = 1
-                return self.request().trackActivity(self.headerLoading).asDriverOnErrorJustComplete()
+                return self.request()
+                    .trackActivity(self.headerLoading)
+                    .asDriverOnErrorJustComplete()
             })
             .map { (events) -> [DefaultSection] in
                 return [DefaultSection(id: 1, items: events)]
             }
             .do(onNext: { (items) in
+                isEnableLoadMore.onNext(true)
                 elements.accept(items)
             })
             .drive()
@@ -71,13 +74,16 @@ extension EventViewModel: ViewModelType {
             .flatMapLatest({ [weak self] () -> Driver<[Event]> in
                 guard let self = self else { return Driver.just([]) }
                 self.currentPage += 1
-                return self.request().trackActivity(self.footerLoading).asDriverOnErrorJustComplete()
+                return self.request()
+                    .trackActivity(self.footerLoading)
+                    .asDriverOnErrorJustComplete()
             })
             .map({ (events) -> [DefaultSection] in
-                if events.isEmpty || elements.value.first?.items.count ?? 0 >= 100 { //TODO: fix Me
-                    noticeNoMoreData.onNext(())
+                if events.isEmpty || elements.value.first?.items.count ?? 0 >= 100 {
+                    isEnableLoadMore.onNext(false)
                     return elements.value
                 } else {
+                    isEnableLoadMore.onNext(true)
                     var currentElements = elements.value.first?.items ?? []
                     currentElements.append(contentsOf: events)
                     return [DefaultSection(id: 1, items: currentElements)]
@@ -89,7 +95,8 @@ extension EventViewModel: ViewModelType {
             .drive()
             .disposed(by: rx.disposeBag)
         
-        return Output(items: elements.asDriver(), noticeNoMoreData: noticeNoMoreData.asDriverOnErrorJustComplete())
+        return Output(items: elements.asDriver(),
+                      isEnableLoadMore: isEnableLoadMore.asDriverOnErrorJustComplete())
     }
 }
 
