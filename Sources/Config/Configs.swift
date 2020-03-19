@@ -15,7 +15,7 @@ final class Configs {
     
     let baseUrl = "https://api.github.com"
     let apiTimeOut = RxTimeInterval.seconds(10)
-    let loggingEnabled = true
+    let loggingEnabled = false
     let logResourcesCountEnabled = false
     let logDeinitEnabled = false
     

@@ -42,3 +42,4 @@ targets:
         - carthage: ObjcExceptionBridging
         - carthage: Differentiator
         - carthage: RxDataSources
+        - carthage: MJRefresh

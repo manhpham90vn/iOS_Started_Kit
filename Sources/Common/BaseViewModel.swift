@@ -12,6 +12,9 @@ class BaseViewModel: NSObject { // swiftlint:disable:this final_class
     let error = ErrorTracker()
     let loading = ActivityIndicator()
     let headerLoading = ActivityIndicator()
+    let footerLoading = ActivityIndicator()
+    
+    var currentPage = 1
     
     override init() {
         super.init()

@@ -8,10 +8,7 @@
 
 import UIKit
 
-final class EventViewController: BaseViewController, BindableType {
-    
-    // MARK: - IBOutlets
-    @IBOutlet weak var tableView: UITableView!
+final class EventViewController: BaseTableViewViewController, BindableType {
     
     // MARK: - Properties
     var viewModel: EventViewModel
@@ -25,15 +22,11 @@ final class EventViewController: BaseViewController, BindableType {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private lazy var refreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        return refreshControl
-    }()
-    
+        
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configView()
         bindViewModel()
     }
@@ -42,8 +35,6 @@ final class EventViewController: BaseViewController, BindableType {
     private func configView() {
         title = "Events"
         navigationItem.setHidesBackButton(true, animated: false)
-        
-        tableView.addSubview(refreshControl)
         tableView.register(cellType: EventTableViewCell.self)
         
         tableView
@@ -53,16 +44,23 @@ final class EventViewController: BaseViewController, BindableType {
     }
 
     func bindViewModel() {
-        
-        viewModel
-            .headerLoading
-            .drive(refreshControl.rx.isRefreshing)
-            .disposed(by: rx.disposeBag)
-        
+                
         viewModel
             .loading
             .asDriver()
             .drive(isLoading)
+            .disposed(by: rx.disposeBag)
+                
+        viewModel
+            .headerLoading
+            .asDriver()
+            .drive(isHeaderLoading)
+            .disposed(by: rx.disposeBag)
+        
+        viewModel
+            .footerLoading
+            .asDriver()
+            .drive(isFooterLoading)
             .disposed(by: rx.disposeBag)
         
         let dataSource = RxTableViewSectionedAnimatedDataSource<DefaultSection>(
@@ -74,14 +72,12 @@ final class EventViewController: BaseViewController, BindableType {
         )
         
         let input = EventViewModel.Input(loadTrigger: Driver.just(()),
-                                         refreshTrigger: refreshControl.rx.controlEvent(.valueChanged).asDriver())
+                                         refreshTrigger: headerRefreshTrigger.asDriverOnErrorJustComplete(),
+                                         loadMoreTrigger: footerLoadMoreTrigger.asDriverOnErrorJustComplete())
         let output = viewModel.transform(input)
         
         output
             .items
-            .map { (meals) -> [DefaultSection] in
-                return [DefaultSection(id: 1, items: meals)]
-            }
             .drive(tableView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
     }

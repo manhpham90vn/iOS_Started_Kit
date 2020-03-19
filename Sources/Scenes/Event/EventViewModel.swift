@@ -21,27 +21,79 @@ extension EventViewModel: ViewModelType {
     struct Input {
         let loadTrigger: Driver<Void>
         let refreshTrigger: Driver<Void>
+        let loadMoreTrigger: Driver<Void>
     }
 
     struct Output {
-        let items: Driver<[Event]>
+        let items: Driver<[DefaultSection]>
     }
 
     func transform(_ input: Input) -> Output {
         
-        let trigger = Driver.merge(input.loadTrigger, input.refreshTrigger)
-           
-        let items = trigger
-            .flatMapLatest({ [weak self] _ -> Driver<[Event]> in
-                guard let self = self else { return Driver.empty() }
-                return self.useCase
-                    .userReceivedEvents(username: AuthManager.share.user?.login ?? "", page: 1)
-                    .trackError(self.error)
-                    .trackActivity(self.loading)
-                    .trackActivity(self.headerLoading)
-                    .asDriverOnErrorJustComplete()
-            })
+        let elements = BehaviorRelay<[DefaultSection]>(value: [])
         
-        return Output(items: items)
+        input
+            .loadTrigger
+            .flatMapLatest({ [weak self] () -> Driver<[Event]> in
+                guard let self = self else { return Driver.just([]) }
+                self.currentPage = 1
+                return self.request().asDriverOnErrorJustComplete()
+            })
+            .map { (events) -> [DefaultSection] in
+                return [DefaultSection(id: 1, items: events)]
+            }
+            .do(onNext: { (items) in
+                elements.accept(items)
+            })
+            .drive()
+            .disposed(by: rx.disposeBag)
+        
+        input
+            .refreshTrigger
+            .flatMapLatest({ [weak self] () -> Driver<[Event]> in
+                guard let self = self else { return Driver.just([]) }
+                self.currentPage = 1
+                return self.request().trackActivity(self.headerLoading).asDriverOnErrorJustComplete()
+            })
+            .map { (events) -> [DefaultSection] in
+                return [DefaultSection(id: 1, items: events)]
+            }
+            .do(onNext: { (items) in
+                elements.accept(items)
+            })
+            .drive()
+            .disposed(by: rx.disposeBag)
+        
+        input
+            .loadMoreTrigger
+            .flatMapLatest({ [weak self] () -> Driver<[Event]> in
+                guard let self = self else { return Driver.just([]) }
+                self.currentPage += 1
+                return self.request().trackActivity(self.footerLoading).asDriverOnErrorJustComplete()
+            })
+            .map({ (events) -> [DefaultSection] in
+                var currentElements = elements.value.first?.items ?? []
+                currentElements.append(contentsOf: events)
+                return [DefaultSection(id: 1, items: currentElements)]
+            })
+            .do(onNext: { (items) in
+                elements.accept(items)
+            })
+            .drive()
+            .disposed(by: rx.disposeBag)
+        
+        return Output(items: elements.asDriver())
     }
+}
+
+extension EventViewModel {
+    
+    func request() -> Observable<[Event]> {
+        return self
+            .useCase
+            .userReceivedEvents(username: AuthManager.share.user?.login ?? "", page: currentPage)
+            .trackError(self.error)
+            .trackActivity(self.loading)
+    }
+    
 }

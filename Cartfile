@@ -6,3 +6,4 @@ github "adamwaite/Validator"
 github "DaveWoodCom/XCGLogger" ~> 7.0.1
 github "SVProgressHUD/SVProgressHUD"
 github "RxSwiftCommunity/RxDataSources" ~> 4.0
+github "CoderMJLee/MJRefresh"
