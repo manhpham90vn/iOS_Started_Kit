@@ -12,9 +12,36 @@ class BaseTableViewViewController: BaseViewController { // swiftlint:disable:thi
 
     let headerRefreshTrigger = PublishSubject<Void>()
     let footerLoadMoreTrigger = PublishSubject<Void>()
-
+    let noticeNoMoreData = PublishSubject<Void>()
+    
     let isHeaderLoading = BehaviorRelay(value: false)
     let isFooterLoading = BehaviorRelay(value: false)
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+            self?.headerRefreshTrigger.onNext(())
+        })
+        isHeaderLoading.bind(to: isAnimatingHeader).disposed(by: rx.disposeBag)
+        
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { [weak self] in
+            self?.footerLoadMoreTrigger.onNext(())
+        })
+        isFooterLoading.takeUntil(noticeNoMoreData).debug().bind(to: isAnimatingFooter).disposed(by: rx.disposeBag) //TODO: fix Me
+        
+        noticeNoMoreData
+            .subscribe(onNext: { [weak self] _ in
+                self?.tableView.mj_footer?.endRefreshingWithNoMoreData()
+            })
+            .disposed(by: rx.disposeBag)
+    }
+    
+}
+
+extension BaseTableViewViewController {
     
     private var isAnimatingHeader: Binder<Bool> {
         return Binder(self) { viewController, loading in
@@ -42,23 +69,6 @@ class BaseTableViewViewController: BaseViewController { // swiftlint:disable:thi
                 }
             }
         }
-    }
-    
-    @IBOutlet weak var tableView: UITableView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
-            self?.headerRefreshTrigger.onNext(())
-        })
-        isHeaderLoading.bind(to: isAnimatingHeader).disposed(by: rx.disposeBag)
-        
-        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { [weak self] in
-            self?.footerLoadMoreTrigger.onNext(())
-        })
-        isFooterLoading.bind(to: isAnimatingFooter).disposed(by: rx.disposeBag)
-        
     }
     
 }

@@ -80,6 +80,11 @@ final class EventViewController: BaseTableViewViewController, BindableType {
             .items
             .drive(tableView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
+        
+        output
+            .noticeNoMoreData
+            .drive(noticeNoMoreData)
+            .disposed(by: rx.disposeBag)
     }
 }
 

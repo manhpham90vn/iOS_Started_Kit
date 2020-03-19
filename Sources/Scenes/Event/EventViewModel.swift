@@ -26,11 +26,13 @@ extension EventViewModel: ViewModelType {
 
     struct Output {
         let items: Driver<[DefaultSection]>
+        let noticeNoMoreData: Driver<Void>
     }
 
     func transform(_ input: Input) -> Output {
         
         let elements = BehaviorRelay<[DefaultSection]>(value: [])
+        let noticeNoMoreData = PublishSubject<Void>()
         
         input
             .loadTrigger
@@ -72,9 +74,14 @@ extension EventViewModel: ViewModelType {
                 return self.request().trackActivity(self.footerLoading).asDriverOnErrorJustComplete()
             })
             .map({ (events) -> [DefaultSection] in
-                var currentElements = elements.value.first?.items ?? []
-                currentElements.append(contentsOf: events)
-                return [DefaultSection(id: 1, items: currentElements)]
+                if events.isEmpty || elements.value.first?.items.count ?? 0 >= 100 { //TODO: fix Me
+                    noticeNoMoreData.onNext(())
+                    return elements.value
+                } else {
+                    var currentElements = elements.value.first?.items ?? []
+                    currentElements.append(contentsOf: events)
+                    return [DefaultSection(id: 1, items: currentElements)]
+                }
             })
             .do(onNext: { (items) in
                 elements.accept(items)
@@ -82,7 +89,7 @@ extension EventViewModel: ViewModelType {
             .drive()
             .disposed(by: rx.disposeBag)
         
-        return Output(items: elements.asDriver())
+        return Output(items: elements.asDriver(), noticeNoMoreData: noticeNoMoreData.asDriverOnErrorJustComplete())
     }
 }
 
