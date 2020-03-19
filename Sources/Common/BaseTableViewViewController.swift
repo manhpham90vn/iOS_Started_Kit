@@ -13,9 +13,9 @@ class BaseTableViewViewController: BaseViewController { // swiftlint:disable:thi
     let headerRefreshTrigger = PublishSubject<Void>()
     let footerLoadMoreTrigger = PublishSubject<Void>()
     
-    let isEnableLoadMore = BehaviorRelay(value: true)
-    let isHeaderLoading = BehaviorRelay(value: false)
-    let isFooterLoading = BehaviorRelay(value: false)
+    let isEnableLoadMore = PublishSubject<Bool>()
+    let isHeaderLoading = PublishSubject<Bool>()
+    let isFooterLoading = PublishSubject<Bool>()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -31,12 +31,15 @@ class BaseTableViewViewController: BaseViewController { // swiftlint:disable:thi
             self?.footerLoadMoreTrigger.onNext(())
         })
         
-        isFooterLoading
-            .filter({ [weak self] _ in
-                self?.isEnableLoadMore.value == true
-            })
-            .bind(to: isAnimatingFooter)
-            .disposed(by: rx.disposeBag)
+        let isEnableAnimatingFooter = Observable.merge(isEnableLoadMore.filter({ $0 == false }),
+                                                       isHeaderLoading.filter({ $0 == true }))
+        Observable.combineLatest(isFooterLoading, isEnableAnimatingFooter) { value, isEnable in
+            return isEnable ? value : nil
+        }
+        .compactMap({ $0 })
+        .asDriverOnErrorJustComplete()
+        .drive(isAnimatingFooter)
+        .disposed(by: rx.disposeBag)
         
         isEnableLoadMore.bind(to: isEnableLoadMoreBinder).disposed(by: rx.disposeBag)
     }

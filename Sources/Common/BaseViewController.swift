@@ -10,14 +10,13 @@ import SVProgressHUD
 
 class BaseViewController: UIViewController { // swiftlint:disable:this final_class
     
-    let isLoading = BehaviorRelay(value: false)
+    let isLoading = PublishSubject<Bool>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         isLoading
-            .asDriver()
-            .distinctUntilChanged()
+            .asDriverOnErrorJustComplete()
             .drive(SVProgressHUD.rx.isAnimating)
             .disposed(by: rx.disposeBag)
     }
