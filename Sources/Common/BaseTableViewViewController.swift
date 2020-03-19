@@ -61,13 +61,9 @@ extension BaseTableViewViewController {
     private var isAnimatingHeader: Binder<Bool> {
         return Binder(self) { viewController, loading in
             if loading {
-                if let isRefreshing = viewController.tableView.mj_header?.isRefreshing, !isRefreshing {
-                    viewController.tableView.mj_header?.beginRefreshing()
-                }
+                viewController.tableView.mj_header?.beginRefreshing()
             } else {
-                if let isRefreshing = viewController.tableView.mj_header?.isRefreshing, isRefreshing {
-                    viewController.tableView.mj_header?.endRefreshing()
-                }
+                viewController.tableView.mj_header?.endRefreshing()
             }
         }
     }
@@ -75,13 +71,9 @@ extension BaseTableViewViewController {
     private var isAnimatingFooter: Binder<Bool> {
         return Binder(self) { viewController, loading in
             if loading {
-                if let isRefreshing = viewController.tableView.mj_footer?.isRefreshing, !isRefreshing {
-                    viewController.tableView.mj_footer?.beginRefreshing()
-                }
+                viewController.tableView.mj_footer?.beginRefreshing()
             } else {
-                if let isRefreshing = viewController.tableView.mj_footer?.isRefreshing, isRefreshing {
-                    viewController.tableView.mj_footer?.endRefreshing()
-                }
+                viewController.tableView.mj_footer?.endRefreshing()
             }
         }
     }
