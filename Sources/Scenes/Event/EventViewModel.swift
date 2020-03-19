@@ -22,6 +22,7 @@ extension EventViewModel: ViewModelType {
         let loadTrigger: Driver<Void>
         let refreshTrigger: Driver<Void>
         let loadMoreTrigger: Driver<Void>
+        let logOutTrigger: Driver<Void>
     }
 
     struct Output {
@@ -91,6 +92,16 @@ extension EventViewModel: ViewModelType {
             })
             .do(onNext: { (items) in
                 elements.accept(items)
+            })
+            .drive()
+            .disposed(by: rx.disposeBag)
+        
+        input
+            .logOutTrigger
+            .do(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                AuthManager.share.onLogOut()
+                self.navigator.logOut()
             })
             .drive()
             .disposed(by: rx.disposeBag)

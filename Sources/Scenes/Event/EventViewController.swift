@@ -12,7 +12,8 @@ final class EventViewController: BaseTableViewViewController, BindableType {
     
     // MARK: - Properties
     var viewModel: EventViewModel
-
+    private let logOutBtn = UIBarButtonItem(title: "LogOut", style: .plain, target: self, action: nil)
+    
     init(viewModel: EventViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -35,6 +36,8 @@ final class EventViewController: BaseTableViewViewController, BindableType {
     private func configView() {
         title = "Events"
         navigationItem.setHidesBackButton(true, animated: false)
+        navigationItem.rightBarButtonItem = logOutBtn
+        
         tableView.register(cellType: EventTableViewCell.self)
         
         tableView
@@ -73,7 +76,8 @@ final class EventViewController: BaseTableViewViewController, BindableType {
         
         let input = EventViewModel.Input(loadTrigger: Driver.just(()),
                                          refreshTrigger: headerRefreshTrigger.asDriverOnErrorJustComplete(),
-                                         loadMoreTrigger: footerLoadMoreTrigger.asDriverOnErrorJustComplete())
+                                         loadMoreTrigger: footerLoadMoreTrigger.asDriverOnErrorJustComplete(),
+                                         logOutTrigger: logOutBtn.rx.tap.asDriver())
         let output = viewModel.transform(input)
         
         output

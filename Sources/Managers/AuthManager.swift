@@ -38,4 +38,9 @@ final class AuthManager {
         }
     }
     
+    func onLogOut() {
+        userDefaults.removeObject(forKey: tokenKey)
+        userDefaults.removeObject(forKey: userKey)
+    }
+    
 }

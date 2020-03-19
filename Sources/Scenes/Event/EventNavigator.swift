@@ -8,9 +8,15 @@
 
 protocol EventNavigatorType {
 
+    func logOut()
+    
 }
 
 struct EventNavigator: EventNavigatorType {
     unowned let assembler: Assembler
     unowned let navigationController: BaseNavigationController
+    
+    func logOut() {
+        navigationController.popViewController(animated: true)
+    }
 }
