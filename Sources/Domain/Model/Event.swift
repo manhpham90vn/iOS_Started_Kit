@@ -24,9 +24,7 @@ final class Event: Codable {
 }
 
 extension Event: IdentifiableType {
-    
-    typealias Identity = String
-    
+        
     var identity: String {
         return id ?? ""
     }

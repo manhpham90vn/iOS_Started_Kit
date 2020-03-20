@@ -12,7 +12,7 @@ final class LoginViewController: BaseViewController, BindableType {
         
     // MARK: - IBOutlets
     @IBOutlet weak var tapButton: UIButton!
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
     // MARK: - Properties
@@ -49,7 +49,7 @@ final class LoginViewController: BaseViewController, BindableType {
             .drive(isLoading)
             .disposed(by: rx.disposeBag)
         
-        let input = LoginViewModel.Input(username: emailTextField.rx.text.orEmpty.asDriver(),
+        let input = LoginViewModel.Input(username: usernameTextField.rx.text.orEmpty.asDriver(),
                                          password: passwordTextField.rx.text.orEmpty.asDriver(),
                                          trigger: tapButton.rx.tap.asDriver())
         

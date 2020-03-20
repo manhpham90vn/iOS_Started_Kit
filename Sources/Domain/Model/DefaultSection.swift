@@ -17,7 +17,6 @@ struct DefaultSection {
 extension DefaultSection: AnimatableSectionModelType {
     
     typealias Item = Event
-    typealias Identity = Int
     
     var identity: Int {
         return id
