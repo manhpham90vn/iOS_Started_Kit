@@ -12,7 +12,9 @@ iOS Started Kit: Clean Architecture + RxSwift + Moya
 - [ ] Handle loggined state
 - [ ] Cache Request
 - [ ] Support [Action](https://github.com/RxSwiftCommunity/Action)
-- [ ] Support [Coordinator](https://github.com/radianttap/Coordinator)
+- [ ] Support [RxFeedback.swift](https://github.com/NoTests/RxFeedback.swift)
+- [ ] Support [ReactorKit](https://github.com/ReactorKit/ReactorKit)
+- [ ] Support [RxFlow](https://github.com/RxSwiftCommunity/RxFlow)
 - [ ] Create generator code tools
 - [ ] Write Unit Test
 - [ ] Refactor install.sh
