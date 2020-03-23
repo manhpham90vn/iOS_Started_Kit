@@ -8,6 +8,5 @@
 @import RxSwift;
 @import RxCocoa;
 @import Validator;
-@import Then;
 @import Reusable;
 @import RxDataSources;

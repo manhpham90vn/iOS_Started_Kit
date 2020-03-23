@@ -1,24 +1,98 @@
 PODS:
+  - Alamofire (5.0.2)
+  - Differentiator (4.0.1)
+  - MJRefresh (3.3.1)
+  - Moya/Core (14.0.0):
+    - Alamofire (~> 5.0)
+  - Moya/RxSwift (14.0.0):
+    - Moya/Core
+    - RxSwift (~> 5.0)
+  - "NSObject+Rx (5.0.2)":
+    - RxSwift (~> 5.0)
+  - ObjcExceptionBridging (1.0.1):
+    - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
+  - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
+  - Reusable (4.1.1):
+    - Reusable/Storyboard (= 4.1.1)
+    - Reusable/View (= 4.1.1)
+  - Reusable/Storyboard (4.1.1)
+  - Reusable/View (4.1.1)
+  - RxCocoa (5.1.0):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxDataSources (4.0.1):
+    - Differentiator (~> 4.0)
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxRelay (5.1.0):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.0)
+  - SVProgressHUD (2.2.6)
   - SwiftLint (0.39.1)
-  - Then (2.6.0)
   - Toast-Swift (5.0.1)
+  - Validator (3.2.1)
+  - XCGLogger (7.0.1):
+    - XCGLogger/Core (= 7.0.1)
+  - XCGLogger/Core (7.0.1):
+    - ObjcExceptionBridging
 
 DEPENDENCIES:
+  - MJRefresh
+  - Moya/RxSwift
+  - "NSObject+Rx (~> 5.0)"
+  - Reusable
+  - RxDataSources (~> 4.0)
+  - SVProgressHUD (from `https://github.com/SVProgressHUD/SVProgressHUD.git`)
   - SwiftLint
-  - Then
   - Toast-Swift (~> 5.0)
+  - Validator
+  - XCGLogger (~> 7.0.1)
 
 SPEC REPOS:
   trunk:
+    - Alamofire
+    - Differentiator
+    - MJRefresh
+    - Moya
+    - "NSObject+Rx"
+    - ObjcExceptionBridging
+    - Reusable
+    - RxCocoa
+    - RxDataSources
+    - RxRelay
+    - RxSwift
     - SwiftLint
-    - Then
     - Toast-Swift
+    - Validator
+    - XCGLogger
+
+EXTERNAL SOURCES:
+  SVProgressHUD:
+    :git: https://github.com/SVProgressHUD/SVProgressHUD.git
+
+CHECKOUT OPTIONS:
+  SVProgressHUD:
+    :commit: 4fdf3fdc8703fd9915dae33fc1363c604a06b24e
+    :git: https://github.com/SVProgressHUD/SVProgressHUD.git
 
 SPEC CHECKSUMS:
+  Alamofire: 3ba7a4db18b4f62c4a1c0e1cb39d7f3d52e10ada
+  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
+  MJRefresh: eeda70fbf0ad277f3178cef1cd0c3532591d6237
+  Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
+  "NSObject+Rx": 2eb2cf51fd1c554118449a7fbc36e4cd620b9e94
+  ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
+  Reusable: 53a9acf5c536f229b31b5865782414b508252ddb
+  RxCocoa: 13d2a4d7546a34b8ececae8c281e4ea1dbb94f2b
+  RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
+  RxRelay: a168bd6caf712d00c676ac344e9295afc93b418e
+  RxSwift: ad5874f24bb0dbffd1e9bb8443604e3578796c7a
+  SVProgressHUD: 6ed134667e9ebb2f33679e8273cd48fd3fa349e5
   SwiftLint: 55e96a4a4d537d4a3156859fc1c54bd24851a046
-  Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
+  Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
+  XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: 047a5f28afe77d42f90edc161fadddbccb60b999
+PODFILE CHECKSUM: bdf672d441f98ae21b22e02fdfca55ebb610053e
 
 COCOAPODS: 1.9.1

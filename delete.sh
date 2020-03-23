@@ -1,1 +1,1 @@
-rm -rf *.xcodeproj *.xcworkspace Pods/ Carthage/
+rm -rf *.xcodeproj *.xcworkspace Pods/ Carthage/ Build/

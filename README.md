@@ -51,9 +51,14 @@ brew install carthage
 
 and run
 ```
-install.sh
+install_carthage.sh
 ```
 
+of 
+
+```
+install_cocoapods.sh
+```
 and try it with your github account
 
 # Reference
