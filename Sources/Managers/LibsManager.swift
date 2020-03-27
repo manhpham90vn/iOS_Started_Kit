@@ -8,8 +8,8 @@
 import Foundation
 import XCGLogger
 import NSObject_Rx
-import Toast_Swift // cocoapods
-//import ToastSwiftFramework // carthage
+//import Toast_Swift // cocoapods
+import ToastSwiftFramework // carthage
 
 final class LibsManager {
 

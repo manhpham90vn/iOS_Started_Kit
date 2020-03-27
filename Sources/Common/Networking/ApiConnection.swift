@@ -6,7 +6,7 @@
 //
 
 import Moya
-//import RxMoya // carthage
+import RxMoya // carthage
 
 final class ApiConnection {
     
