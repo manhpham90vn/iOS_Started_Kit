@@ -44,9 +44,6 @@ extension ApiRouter: TargetType {
     }
     
     var headers: [String: String]? {
-        if let token = AuthManager.share.token {
-            return ["Authorization": "Basic \(token)"]
-        }
         return nil
     }
     
