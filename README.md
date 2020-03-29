@@ -49,7 +49,14 @@ brew install xcodegen
 brew install carthage
 ```
 
+### SwiftLint
+
+```shell
+brew install swiftlint
+```
+
 and run
+
 ```
 install_carthage.sh
 ```
