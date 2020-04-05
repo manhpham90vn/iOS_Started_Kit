@@ -8,8 +8,9 @@
 import Foundation
 import XCGLogger
 import NSObject_Rx
-//import Toast_Swift // cocoapods
-import ToastSwiftFramework // carthage
+import Toast_Swift // cocoapods
+//import ToastSwiftFramework // carthage
+import Bagel
 
 final class LibsManager {
 
@@ -21,6 +22,7 @@ final class LibsManager {
         let libsManager = LibsManager.shared
         libsManager.setupLoger()
         libsManager.setupToast()
+        libsManager.setupBagel()
     }
     
     private func setupLoger() {
@@ -35,6 +37,10 @@ final class LibsManager {
         style.messageColor = .white
         style.imageSize = CGSize(width: 20, height: 20)
         ToastManager.shared.style = style
+    }
+    
+    func setupBagel() {
+        Bagel.start()
     }
     
 }

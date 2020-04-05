@@ -1,5 +1,8 @@
 PODS:
   - Alamofire (5.0.2)
+  - Bagel (1.3.2):
+    - CocoaAsyncSocket
+  - CocoaAsyncSocket (7.6.4)
   - Differentiator (4.0.1)
   - MJRefresh (3.3.1)
   - Moya/Core (14.0.0):
@@ -37,6 +40,7 @@ PODS:
     - ObjcExceptionBridging
 
 DEPENDENCIES:
+  - Bagel (~> 1.3.2)
   - MJRefresh
   - Moya/RxSwift
   - "NSObject+Rx (~> 5.0)"
@@ -51,6 +55,8 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Bagel
+    - CocoaAsyncSocket
     - Differentiator
     - MJRefresh
     - Moya
@@ -77,6 +83,8 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 3ba7a4db18b4f62c4a1c0e1cb39d7f3d52e10ada
+  Bagel: 199e0105ac694d6eee9db54dd006c940da6ce81b
+  CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   MJRefresh: eeda70fbf0ad277f3178cef1cd0c3532591d6237
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
@@ -93,6 +101,6 @@ SPEC CHECKSUMS:
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: bdf672d441f98ae21b22e02fdfca55ebb610053e
+PODFILE CHECKSUM: 637cd877e8f4843add2b75f9a12c33eeb08f9616
 
 COCOAPODS: 1.9.1

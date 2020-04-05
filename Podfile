@@ -15,6 +15,7 @@ target 'MyApp' do
   # Tools
   pod 'Reusable' # https://github.com/AliSoftware/Reusable
   pod 'Validator' # https://github.com/adamwaite/Validator
+  pod 'Bagel', '~>  1.3.2' # https://github.com/yagiz/Bagel
 
   # Logging
   pod 'XCGLogger', '~> 7.0.1' # https://github.com/DaveWoodCom/XCGLogger
