@@ -5,7 +5,6 @@
 //  Created by Manh Pham on 3/14/20.
 //
 
-import Moya
 //import RxMoya // carthage
 
 final class ApiConnection {

@@ -5,8 +5,6 @@
 //  Created by Manh Pham on 3/14/20.
 //
 
-import Moya
-
 class BaseViewModel: NSObject { // swiftlint:disable:this final_class
     
     let error = ErrorTracker()

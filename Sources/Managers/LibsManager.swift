@@ -10,7 +10,7 @@ import XCGLogger
 import NSObject_Rx
 import Toast_Swift // cocoapods
 //import ToastSwiftFramework // carthage
-import Bagel
+import MPDebug
 
 final class LibsManager {
 
@@ -22,7 +22,7 @@ final class LibsManager {
         let libsManager = LibsManager.shared
         libsManager.setupLoger()
         libsManager.setupToast()
-        libsManager.setupBagel()
+        libsManager.setupDebug()
     }
     
     private func setupLoger() {
@@ -39,8 +39,8 @@ final class LibsManager {
         ToastManager.shared.style = style
     }
     
-    func setupBagel() {
-        Bagel.start()
+    func setupDebug() {
+        MPDebugLog.share.start()
     }
-    
+        
 }

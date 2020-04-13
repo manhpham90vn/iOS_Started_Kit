@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Moya
 
 final class ApiProvider<Target: TargetType>: MoyaProvider<Target> {
     

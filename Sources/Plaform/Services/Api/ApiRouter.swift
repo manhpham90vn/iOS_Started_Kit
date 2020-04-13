@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Moya
 
 enum ApiRouter {
     case login

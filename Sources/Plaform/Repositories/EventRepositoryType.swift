@@ -12,7 +12,9 @@ protocol EventRepositoryType {
 struct EventRepository: EventRepositoryType {
     
     func userReceivedEvents(username: String, page: Int) -> Single<[Event]> {
-        return ApiConnection.share.userReceivedEvents(username: username, page: page)
+        return ApiConnection.share.requestArray(target: MultiTarget(ApiRouter.userReceivedEvents(username: username,
+                                                                                                 page: page)),
+                                                type: Event.self)
     }
     
 }

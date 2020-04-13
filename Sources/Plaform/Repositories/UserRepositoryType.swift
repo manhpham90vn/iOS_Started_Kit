@@ -12,7 +12,7 @@ protocol UserRepositoryType {
 struct UserRepository: UserRepositoryType {
     
     func login() -> Single<User> {
-        return ApiConnection.share.login()
+        return ApiConnection.share.request(target: MultiTarget(ApiRouter.login), type: User.self)
     }
     
 }
