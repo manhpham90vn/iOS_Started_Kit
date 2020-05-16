@@ -57,6 +57,9 @@ targets:
             *)
             ;;
             esac
+    postBuildScripts:
         - name: Crashlytics
           script: |
-            "${PODS_ROOT}/FirebaseCrashlytics/run"
+            ${PODS_ROOT}/FirebaseCrashlytics/run
+          inputFiles:
+            - $(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)
