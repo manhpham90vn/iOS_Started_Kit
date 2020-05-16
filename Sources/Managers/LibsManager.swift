@@ -10,7 +10,9 @@ import XCGLogger
 import NSObject_Rx
 import Toast_Swift // cocoapods
 //import ToastSwiftFramework // carthage
+#if DEBUG
 import MPDebug
+#endif
 
 final class LibsManager {
 
@@ -40,7 +42,9 @@ final class LibsManager {
     }
     
     func setupDebug() {
+        #if DEBUG
         MPDebugLog.share.start()
+        #endif
     }
         
 }

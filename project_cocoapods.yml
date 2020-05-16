@@ -1,5 +1,15 @@
 name: My Project
 
+configs:
+    Debug: debug
+    Staging: release
+    Release: release
+
+configFiles:
+    Debug: Sources/Configs/BuildConfigurations/Debug.xcconfig
+    Staging: Sources/Configs/BuildConfigurations/Staging.xcconfig
+    Release: Sources/Configs/BuildConfigurations/Release.xcconfig
+
 options:
   createIntermediateGroups: true
   groupSortPosition: top
@@ -8,12 +18,19 @@ options:
   tabWidth: 4
   bundleIdPrefix: "com.manhpham"
 
+settings:
+PRODUCT_BUNDLE_IDENTIFIER: $(PRODUCT_BUNDLE_IDENTIFIER)
+
 targets:
   MyApp:
     type: application
     platform: iOS
     deploymentTarget: "10.0"
     sources: [Sources]
+    configFiles:
+        Debug: Sources/Configs/BuildConfigurations/Debug.xcconfig
+        Staging: Sources/Configs/BuildConfigurations/Staging.xcconfig
+        Release: Sources/Configs/BuildConfigurations/Release.xcconfig
     settings:
         INFOPLIST_FILE: Sources/Resources/Info.plist
         SWIFT_VERSION: "5.0"

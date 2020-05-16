@@ -16,7 +16,7 @@ target 'MyApp' do
   # Tools
   pod 'Reusable' # https://github.com/AliSoftware/Reusable
   pod 'Validator' # https://github.com/adamwaite/Validator
-  pod 'MPDebug' # https://github.com/manhpham90vn/MPDebug
+  pod 'MPDebug', :configurations => ['Debug'] # https://github.com/manhpham90vn/MPDebug
 
   # Logging
   pod 'XCGLogger', '~> 7.0.1' # https://github.com/DaveWoodCom/XCGLogger

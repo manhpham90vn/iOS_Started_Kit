@@ -1,0 +1,15 @@
+//
+//  Release.xcconfig
+//  My Project
+//
+
+// https://help.apple.com/xcode/#/dev745c5c974
+#include "./Pods/Target Support Files/Pods-MyApp/Pods-MyApp.release.xcconfig"
+
+APP_NAME = My App Release
+PRODUCT_BUNDLE_IDENTIFIER = com.manhpham.myapp.release
+SLASH = /
+SCHEME = https:${SLASH}${SLASH}
+SERVER_SIDE = ${SCHEME}api.github.com
+APP_VERSION = 2.0
+APP_VERSION_BUILD = 2
