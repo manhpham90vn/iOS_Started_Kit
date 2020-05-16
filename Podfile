@@ -29,6 +29,7 @@ target 'MyApp' do
 
   # Firebase
   pod 'Firebase/Analytics'
+  pod 'Firebase/Crashlytics'
   
 end
 
