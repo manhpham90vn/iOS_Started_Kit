@@ -27,6 +27,9 @@ target 'MyApp' do
   pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git' # https://github.com/SVProgressHUD/SVProgressHUD
   pod 'MJRefresh' # https://github.com/CoderMJLee/MJRefresh
 
+  # Firebase
+  pod 'Firebase/Analytics'
+  
 end
 
 post_install do |installer|

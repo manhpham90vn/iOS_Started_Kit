@@ -13,6 +13,7 @@ import Toast_Swift // cocoapods
 #if DEBUG
 import MPDebug
 #endif
+import Firebase
 
 final class LibsManager {
 
@@ -25,6 +26,7 @@ final class LibsManager {
         libsManager.setupLoger()
         libsManager.setupToast()
         libsManager.setupDebug()
+        libsManager.setupFirebase()
     }
     
     private func setupLoger() {
@@ -45,6 +47,10 @@ final class LibsManager {
         #if DEBUG
         MPDebugLog.share.start()
         #endif
+    }
+    
+    func setupFirebase() {
+        FirebaseApp.configure()
     }
         
 }
