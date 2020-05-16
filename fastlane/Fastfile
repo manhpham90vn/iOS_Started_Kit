@@ -1,0 +1,102 @@
+default_platform(:ios)
+
+platform :ios do
+    desc "Export ipa"
+        lane :export do
+            time = Time.new.strftime("%Y_%d_%m_%H_%M_%S")
+
+            app_name = get_xcconfig_value(
+              path: ENV['PATH_XCCONFIG_DEBUG'],
+              name: 'APP_NAME'
+            )
+
+            identifider = get_xcconfig_value(
+              path: ENV['PATH_XCCONFIG_DEBUG'],
+              name: 'PRODUCT_BUNDLE_IDENTIFIER'
+            )
+
+            version = get_xcconfig_value(
+              path: ENV['PATH_XCCONFIG_DEBUG'],
+              name: 'APP_VERSION'
+            )
+
+            build_number = get_xcconfig_value(
+              path: ENV['PATH_XCCONFIG_DEBUG'],
+              name: 'APP_VERSION_BUILD'
+            )
+
+            build_number = build_number.to_i
+            build_number += 1
+
+            update_xcconfig_value(
+              path: ENV['PATH_XCCONFIG_DEBUG'],
+              name: 'APP_VERSION_BUILD',
+              value: build_number.to_s
+            )
+
+            gym(
+                scheme: ENV['SCHEME'],
+                configuration: "Debug",
+                export_method: "development",
+                output_directory: "fastlane/build",
+                include_bitcode: false,
+                output_name: time + "_" + app_name + "_" + version + "_" + build_number.to_s + ".ipa",
+                clean: true,
+                export_options: {
+                    uploadBitcode: false,
+                    uploadSymbols: false,
+                    compileBitcode: false,
+                    provisioningProfiles: { identifider => ENV['PROVISION_NAME_DEBUG'],
+                                            "signingStyle": "manual" }
+                }
+            )
+    end
+    desc "Upload testflight"
+        lane :gotestflight do
+
+            app_name = get_xcconfig_value(
+              path: ENV['PATH_XCCONFIG_STAGING'],
+              name: 'APP_NAME'
+            )
+
+            identifider = get_xcconfig_value(
+              path: ENV['PATH_XCCONFIG_STAGING'],
+              name: 'PRODUCT_BUNDLE_IDENTIFIER'
+            )
+
+            version = get_xcconfig_value(
+              path: ENV['PATH_XCCONFIG_STAGING'],
+              name: 'APP_VERSION'
+            )
+
+            build_number = get_xcconfig_value(
+              path: ENV['PATH_XCCONFIG_STAGING'],
+              name: 'APP_VERSION_BUILD'
+            )
+
+            build_number = build_number.to_i
+            build_number += 1
+
+            update_xcconfig_value(
+              path: ENV['PATH_XCCONFIG_STAGING'],
+              name: 'APP_VERSION_BUILD',
+              value: build_number.to_s
+            )
+
+            build_app(
+                scheme: ENV['SCHEME'],
+                configuration: "Staging",
+                export_method: "app-store",
+                output_directory: "fastlane/build",
+                clean: true,
+                export_options: {
+                    provisioningProfiles: { identifider => ENV['PROVISION_NAME_STAGING'],
+                                            "signingStyle": "manual" }
+                }
+            )
+            upload_to_testflight(
+              app_identifier: identifider,
+              skip_submission: true
+            )
+    end    
+end
