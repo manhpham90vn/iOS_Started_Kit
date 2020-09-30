@@ -86,6 +86,9 @@ PODS:
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - PromisesObjC (1.2.10)
+  - R.swift (5.2.2):
+    - R.swift.Library (~> 5.2.0)
+  - R.swift.Library (5.2.0)
   - Reusable (4.1.1):
     - Reusable/Storyboard (= 4.1.1)
     - Reusable/View (= 4.1.1)
@@ -120,6 +123,7 @@ DEPENDENCIES:
   - Moya/RxSwift
   - MPDebug
   - "NSObject+Rx (~> 5.0)"
+  - R.swift
   - Reusable
   - RxDataSources (~> 4.0)
   - SVProgressHUD (from `https://github.com/SVProgressHUD/SVProgressHUD.git`)
@@ -144,6 +148,8 @@ SPEC REPOS:
     - nanopb
     - ObjcExceptionBridging
     - PromisesObjC
+    - R.swift
+    - R.swift.Library
     - RxCocoa
     - RxDataSources
     - RxRelay
@@ -189,6 +195,8 @@ SPEC CHECKSUMS:
   "NSObject+Rx": 2eb2cf51fd1c554118449a7fbc36e4cd620b9e94
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
+  R.swift: 7c52cdc57a66840ffe6cbd8a823d732059d42a32
+  R.swift.Library: 5ba4f1631300caf9a4d890186930da85d540769d
   Reusable: 53a9acf5c536f229b31b5865782414b508252ddb
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
@@ -202,6 +210,6 @@ SPEC CHECKSUMS:
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: 157b4a71b9e7103f0f3d5d277dd2550de4247aee
+PODFILE CHECKSUM: f07725c3221f45421e04739249aecdcb180942e5
 
 COCOAPODS: 1.9.1

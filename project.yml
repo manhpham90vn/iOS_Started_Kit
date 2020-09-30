@@ -17,6 +17,7 @@ options:
     indentWidth: 4
     tabWidth: 4
     bundleIdPrefix: "com.manhpham"
+    developmentLanguage: ja
 
 settings:
 PRODUCT_BUNDLE_IDENTIFIER: $(PRODUCT_BUNDLE_IDENTIFIER)
@@ -26,7 +27,9 @@ targets:
     type: application
     platform: iOS
     deploymentTarget: "12.0"
-    sources: [Sources]
+    sources: 
+      - Sources
+      - R.generated.swift
     attributes:
       SystemCapabilities:
         com.apple.Push:
@@ -42,7 +45,14 @@ targets:
         SWIFT_VERSION: "5.0"
         CODE_SIGN_STYLE: "Manual"
         TARGETED_DEVICE_FAMILY: 1
-        
+    prebuildScripts:
+        - name: R.swift
+          script: |
+            "$PODS_ROOT/R.swift/rswift" generate "$SRCROOT/R.generated.swift"
+          inputFiles:
+            - $TEMP_DIR/rswift-lastrun
+          outputFiles:
+            - $SRCROOT/R.generated.swift
     postCompileScripts:
         - name: GoogleServiceInfo
           script: |
