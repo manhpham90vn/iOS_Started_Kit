@@ -38,7 +38,7 @@ final class LoginViewController: BaseViewController, BindableType {
     
     // MARK: - Methods
     private func configView() {
-        title = "Login Github"
+        title = R.string.localizable.login_title()
     }
 
     func bindViewModel() {

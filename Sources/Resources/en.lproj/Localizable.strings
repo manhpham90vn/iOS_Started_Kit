@@ -6,4 +6,8 @@
   
 */
 
-"title" = "Title";
+// en
+
+"login_title" = "Login Github";
+"log_out_title" = "LogOut";
+"event_title" = "Events";

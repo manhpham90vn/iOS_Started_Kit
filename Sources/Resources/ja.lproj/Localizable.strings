@@ -6,4 +6,8 @@
   
 */
 
-"title" = "題名";
+// ja
+
+"login_title" = "ログインGithub";
+"log_out_title" = "ログアウト";
+"event_title" = "イベント";

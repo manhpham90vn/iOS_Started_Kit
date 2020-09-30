@@ -12,7 +12,7 @@ final class EventViewController: BaseTableViewViewController, BindableType {
     
     // MARK: - Properties
     var viewModel: EventViewModel
-    private let logOutBtn = UIBarButtonItem(title: "LogOut", style: .plain, target: self, action: nil)
+    private let logOutBtn = UIBarButtonItem(title: R.string.localizable.log_out_title(), style: .plain, target: self, action: nil)
     
     init(viewModel: EventViewModel) {
         self.viewModel = viewModel
@@ -34,7 +34,7 @@ final class EventViewController: BaseTableViewViewController, BindableType {
     
     // MARK: - Methods
     private func configView() {
-        title = "Events"
+        title = R.string.localizable.event_title()
         navigationItem.setHidesBackButton(true, animated: false)
         navigationItem.rightBarButtonItem = logOutBtn
         

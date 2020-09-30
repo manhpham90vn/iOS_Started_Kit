@@ -6,4 +6,8 @@
   
 */
 
-"title" = "Xin chào";
+// vi
+
+"login_title" = "Đăng nhập Github";
+"log_out_title" = "Đăng xuất";
+"event_title" = "Sự kiện";
