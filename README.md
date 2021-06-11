@@ -58,14 +58,9 @@ brew install swiftlint
 and run
 
 ```
-install_carthage.sh
+make
 ```
 
-of 
-
-```
-install_cocoapods.sh
-```
 and try it with your github account
 
 # Reference
